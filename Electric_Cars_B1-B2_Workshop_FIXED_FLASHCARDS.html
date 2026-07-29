@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electric Cars · B1–B2 Video Workshop</title>
+<style>
+:root{
+  --bg:#eef4f7;--paper:#fffdf8;--ink:#1f2a2e;--muted:#66747b;--line:#d8e2e5;--brand:#155d6f;--brand2:#d8773d;--soft:#e7f5f7;--soft2:#fff0e4;--ok:#2f7d55;--bad:#b34545;
+  --shadow:0 18px 50px rgba(20,38,45,.11);--radius:26px;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font:16px/1.62 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#dff4f8,#f8fbfc 35%,#eef4f7);color:var(--ink)}
+button,input,textarea{font:inherit}button{cursor:pointer}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,253,248,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{max-width:1180px;margin:auto;padding:12px 18px;display:flex;gap:12px;justify-content:space-between;align-items:center}.logo{font-weight:900;color:var(--brand)}.navlinks{display:flex;gap:8px;flex-wrap:wrap}.navlinks a{text-decoration:none;color:var(--ink);font-size:13px;font-weight:800;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:white}
+.hero{background:radial-gradient(circle at 20% 15%,rgba(255,255,255,.22),transparent 23%),linear-gradient(135deg,#0c3540,#13768a 60%,#eaa15a);color:white;overflow:hidden}
+.hero-inner{max-width:1180px;margin:auto;padding:64px 18px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+h1{font-size:clamp(40px,6vw,72px);line-height:.96;margin:0 0 16px;letter-spacing:-.05em}.hero p{font-size:19px;color:#eefcff;max-width:760px}.badges{display:flex;gap:9px;flex-wrap:wrap}.badge{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);font-weight:850;font-size:13px}
+.video-card{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.30);border-radius:28px;padding:14px;box-shadow:0 20px 50px rgba(0,0,0,.23)}.video-wrap{position:relative;padding-top:56.25%;border-radius:18px;overflow:hidden;background:#111}.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+main{max-width:1180px;margin:auto;padding:32px 18px 90px}section.module,.part{background:linear-gradient(180deg,#fffdf8,#fffaf2);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;margin:24px 0}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;color:var(--brand2);font-size:12px;font-weight:900;margin:0 0 8px}h2{font-size:clamp(28px,3vw,42px);line-height:1.08;margin:0 0 12px;letter-spacing:-.035em}h3{font-size:22px;margin:0 0 12px}.lead{font-size:18px;color:var(--muted);max-width:850px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid.two{grid-template-columns:repeat(2,1fr)}.mini-card,.gap,.quizq,.discussion-card,.visual-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:17px;box-shadow:0 10px 24px rgba(20,38,45,.06)}
+.deck{margin:18px 0}.deck-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.modes{display:flex;gap:8px;flex-wrap:wrap}.modebtn{border:0;border-radius:999px;background:var(--brand);color:white;padding:8px 12px;font-weight:850}.modebtn.secondary{background:#f2ebe2;color:var(--ink);border:1px solid var(--line)}
+.flashgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.flipcard{height:176px;perspective:1000px;cursor:pointer}.flip-inner{position:relative;width:100%;height:100%;transition:.45s;transform-style:preserve-3d}.flipcard.flipped .flip-inner{transform:rotateY(180deg)}.face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--line);border-radius:20px;background:#fff;padding:18px;display:flex;flex-direction:column;justify-content:center;gap:10px;box-shadow:0 10px 24px rgba(20,38,45,.06)}.back-face{transform:rotateY(180deg);background:var(--soft)}.face strong{font-size:19px;line-height:1.25}.face small{color:var(--muted)}.mode-label{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--brand2);font-weight:900}
+.speak,.jump,.check-radio,.check-one,.show-one,.complete{border:0;border-radius:999px;background:var(--brand);color:white;padding:8px 12px;font-weight:850;line-height:1.1}.speak{padding:7px 9px;width:max-content}.show-one{background:#f2ebe2;color:var(--ink);border:1px solid var(--line)}
+.summary{font-size:18px;background:linear-gradient(180deg,#fff,#fff7ee);border-left:6px solid var(--brand2)}.word{border:0;border-radius:8px;padding:1px 5px;font-weight:850;color:var(--ink);display:inline;line-height:1.6;background:#dcefed;cursor:help}.legend{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.legend span{border-radius:999px;padding:6px 10px;font-size:13px;font-weight:850}.legend .old{background:#dcefed}.legend .new{background:#ffe0c6}
+.visuals{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.visual-card{background:linear-gradient(160deg,#fff,#edf8fb)}.visual-card .icon{font-size:44px;margin-bottom:8px}.visual-card p{color:var(--muted);margin:0}
+.part-head{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start}.preq{grid-column:1/-1;background:var(--soft2);border:1px solid #efd4bd;border-radius:18px;padding:12px 14px;margin:4px 0}.listen-note{grid-column:1/-1;display:inline-block;width:max-content;max-width:100%;padding:8px 12px;border-radius:999px;background:#183f49;color:white;font-weight:900}
+.part-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin-top:20px}.transcript,.after{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px}.transcript p{margin:0 0 14px}.after{background:#f8fbfb}.pills{display:flex;flex-wrap:wrap;gap:8px}.pill{background:#fff;color:var(--brand);border:1px solid var(--line)}
+.opts{display:grid;gap:8px;margin:10px 0}.opts label{display:block;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:#fffdfa}.fb{font-weight:850;margin-left:10px}.fb.ok{color:var(--ok)}.fb.bad{color:var(--bad)}input[type=text],.gap input,textarea{width:100%;border:1px solid var(--line);border-radius:14px;background:white;padding:12px 14px;margin:8px 0 10px}textarea{min-height:88px;resize:vertical}
+.discussion{background:#fff7ed;border:1px solid #efd4bd;border-radius:20px;margin-top:20px;padding:20px}.discussion-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px}.discussion-card h3{font-size:18px}
+.progress{position:fixed;right:16px;bottom:16px;z-index:60;background:rgba(255,253,248,.96);border:1px solid var(--line);border-radius:18px;padding:12px 14px;box-shadow:var(--shadow);width:220px}.bar{height:9px;background:#eadfce;border-radius:999px;overflow:hidden;margin:8px 0}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:.3s}.progress small{color:var(--muted)}
+.tooltip{position:fixed;z-index:100;left:50%;bottom:84px;transform:translateX(-50%);max-width:420px;background:#12282f;color:white;border-radius:18px;padding:16px;box-shadow:var(--shadow);display:none}.tooltip strong{display:block;font-size:18px}.tooltip .ru{color:#ffd7b4;margin:4px 0 8px}.tooltip button{background:#fff;color:#12282f}
+@media(max-width:860px){.hero-inner,.part-grid,.grid,.grid.two,.visuals,.discussion-grid,.flashgrid{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}.part-head{grid-template-columns:1fr}.jump{width:max-content}.progress{left:10px;right:10px;bottom:10px;width:auto}main{padding-bottom:120px}section.module,.part{padding:20px}}
+</style>
+</head>
+<body>
+<header class="topbar"><nav class="nav"><div class="logo">Video Workshop · Future Transport</div><div class="navlinks"><a href="#revision">Revision</a><a href="#linkers">Linking words</a><a href="#preview">Preview</a><a href="#options">Parts</a><a href="#discussion">Discussion</a></div></nav></header>
+<section class="hero" id="video"><div class="hero-inner"><div><p class="eyebrow">Cars · technology · predictions</p><h1>The surprisingly long history of electric cars</h1><p>Practise future predictions, transport vocabulary, and linking words such as <strong>however</strong>, <strong>provided that</strong> and <strong>unless</strong>.</p><div class="badges"><span class="badge">B1–B2 listening</span><span class="badge">YouTube + subtitles</span><span class="badge">will / won’t / might</span><span class="badge">discussion-rich</span></div></div><div class="video-card"><div class="video-wrap"><iframe id="yt" src="https://www.youtube.com/embed/-EG6rqA2vvA?rel=0" title="The surprisingly long history of electric cars" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div></div></section>
+
+<main>
+<section class="module" id="revision"><p class="eyebrow">Section 1</p><h2>Revision from previous videos</h2><p class="lead">Choose EN→RU or RU→EN. Click a card to check the other side.</p>
+    <div class="deck" id="revisionDeck">
+      <div class="deck-head">
+        <h3>Previous vocabulary</h3>
+        <div class="modes">
+          <button class="modebtn" data-deck="revisionDeck" data-mode="enru">EN → RU</button>
+          <button class="modebtn secondary" data-deck="revisionDeck" data-mode="ruen">RU → EN</button>
+        </div>
+      </div>
+      <div class="flashgrid">
+        
+        <article class="flipcard" data-en="a vital component" data-ru="жизненно важный компонент" data-ex="Batteries are a vital component of electric vehicles.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>a vital component</strong>
+              <button class="speak" data-say="a vital component">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>жизненно важный компонент</strong>
+              <small>Batteries are a vital component of electric vehicles.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="complex systems" data-ru="сложные системы" data-ex="Modern cars are complex systems.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>complex systems</strong>
+              <button class="speak" data-say="complex systems">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>сложные системы</strong>
+              <small>Modern cars are complex systems.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="keep track of" data-ru="отслеживать" data-ex="Consumers keep track of cost, range and charging time.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>keep track of</strong>
+              <button class="speak" data-say="keep track of">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>отслеживать</strong>
+              <small>Consumers keep track of cost, range and charging time.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="a huge success" data-ru="огромный успех" data-ex="The Model T became a huge success.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>a huge success</strong>
+              <button class="speak" data-say="a huge success">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>огромный успех</strong>
+              <small>The Model T became a huge success.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="in the long run" data-ru="в долгосрочной перспективе" data-ex="Electric cars can save money in the long run.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>in the long run</strong>
+              <button class="speak" data-say="in the long run">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>в долгосрочной перспективе</strong>
+              <small>Electric cars can save money in the long run.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="make an informed choice" data-ru="сделать осознанный выбор" data-ex="Buyers need information to make an informed choice.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>make an informed choice</strong>
+              <button class="speak" data-say="make an informed choice">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>сделать осознанный выбор</strong>
+              <small>Buyers need information to make an informed choice.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="a long-term commitment" data-ru="долгосрочная приверженность" data-ex="Climate policy requires a long-term commitment.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>a long-term commitment</strong>
+              <button class="speak" data-say="a long-term commitment">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>долгосрочная приверженность</strong>
+              <small>Climate policy requires a long-term commitment.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="develop in unexpected directions" data-ru="развиваться неожиданным образом" data-ex="Technology can develop in unexpected directions.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>develop in unexpected directions</strong>
+              <button class="speak" data-say="develop in unexpected directions">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>развиваться неожиданным образом</strong>
+              <small>Technology can develop in unexpected directions.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="solve practical problems" data-ru="решать практические проблемы" data-ex="Engineers solve practical problems.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>solve practical problems</strong>
+              <button class="speak" data-say="solve practical problems">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>решать практические проблемы</strong>
+              <small>Engineers solve practical problems.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="support other people" data-ru="поддерживать других людей" data-ex="Good transport systems support people in daily life.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>support other people</strong>
+              <button class="speak" data-say="support other people">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>поддерживать других людей</strong>
+              <small>Good transport systems support people in daily life.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="broaden your experience" data-ru="расширить опыт" data-ex="Learning about transport can broaden your experience.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>broaden your experience</strong>
+              <button class="speak" data-say="broaden your experience">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>расширить опыт</strong>
+              <small>Learning about transport can broaden your experience.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="have hidden value" data-ru="иметь скрытую ценность" data-ex="Old ideas can have hidden value.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>have hidden value</strong>
+              <button class="speak" data-say="have hidden value">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>иметь скрытую ценность</strong>
+              <small>Old ideas can have hidden value.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="threat" data-ru="угроза" data-ex="Pollution is a threat to public health.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>threat</strong>
+              <button class="speak" data-say="threat">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>угроза</strong>
+              <small>Pollution is a threat to public health.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="conservation" data-ru="охрана природы" data-ex="Cleaner transport can support conservation.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>conservation</strong>
+              <button class="speak" data-say="conservation">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>охрана природы</strong>
+              <small>Cleaner transport can support conservation.</small>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div></section>
+
+<section class="module" id="linkers"><p class="eyebrow">Section 2</p><h2>Linking words for predictions</h2><p class="lead">Choose EN→RU or RU→EN. Use these words to make answers more logical.</p>
+    <div class="deck" id="linkerDeck">
+      <div class="deck-head">
+        <h3>Linking-word flashcards</h3>
+        <div class="modes">
+          <button class="modebtn" data-deck="linkerDeck" data-mode="enru">EN → RU</button>
+          <button class="modebtn secondary" data-deck="linkerDeck" data-mode="ruen">RU → EN</button>
+        </div>
+      </div>
+      <div class="flashgrid">
+        
+        <article class="flipcard" data-en="However," data-ru="однако" data-ex="Electric cars were clean and quiet. However, batteries were expensive.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>However,</strong>
+              <button class="speak" data-say="However,">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>однако</strong>
+              <small>Electric cars were clean and quiet. However, batteries were expensive.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="Alternatively," data-ru="в качестве альтернативы" data-ex="Alternatively, buyers could choose a gasoline-powered car.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>Alternatively,</strong>
+              <button class="speak" data-say="Alternatively,">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>в качестве альтернативы</strong>
+              <small>Alternatively, buyers could choose a gasoline-powered car.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="At the same time," data-ru="в то же время" data-ex="At the same time, gasoline became cheaper.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>At the same time,</strong>
+              <button class="speak" data-say="At the same time,">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>в то же время</strong>
+              <small>At the same time, gasoline became cheaper.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="As a result," data-ru="в результате" data-ex="As a result, electric cars almost disappeared.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>As a result,</strong>
+              <button class="speak" data-say="As a result,">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>в результате</strong>
+              <small>As a result, electric cars almost disappeared.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="Provided that" data-ru="при условии что" data-ex="Electric cars may dominate provided that charging becomes easier.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>Provided that</strong>
+              <button class="speak" data-say="Provided that">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>при условии что</strong>
+              <small>Electric cars may dominate provided that charging becomes easier.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="Unless" data-ru="если не" data-ex="They will not replace petrol cars unless prices fall.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>Unless</strong>
+              <button class="speak" data-say="Unless">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>если не</strong>
+              <small>They will not replace petrol cars unless prices fall.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="While" data-ru="в то время как / хотя" data-ex="While electric cars save fuel, they still need better batteries.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>While</strong>
+              <button class="speak" data-say="While">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>в то время как / хотя</strong>
+              <small>While electric cars save fuel, they still need better batteries.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="In the long run," data-ru="в долгосрочной перспективе" data-ex="In the long run, electric cars may become cheaper.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>In the long run,</strong>
+              <button class="speak" data-say="In the long run,">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>в долгосрочной перспективе</strong>
+              <small>In the long run, electric cars may become cheaper.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="By contrast," data-ru="напротив" data-ex="Gasoline cars were noisy. By contrast, electric cars were quiet.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>By contrast,</strong>
+              <button class="speak" data-say="By contrast,">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>напротив</strong>
+              <small>Gasoline cars were noisy. By contrast, electric cars were quiet.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="Therefore," data-ru="поэтому" data-ex="Battery progress is essential. Therefore, investment matters.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>Therefore,</strong>
+              <button class="speak" data-say="Therefore,">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>поэтому</strong>
+              <small>Battery progress is essential. Therefore, investment matters.</small>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div><div class="mini-card" style="margin-top:16px"><h3>Mini-practice</h3><p>Complete orally: Electric cars will become more popular, <strong>provided that</strong>...</p><p>Contrast orally: Electric cars are cleaner. <strong>However,</strong>...</p></div></section>
+
+<section class="module" id="preview"><p class="eyebrow">Section 3</p><h2>New vocabulary</h2><p class="lead">Choose EN→RU or RU→EN. Click a card to check.</p>
+    <div class="deck" id="newDeck">
+      <div class="deck-head">
+        <h3>New transport vocabulary</h3>
+        <div class="modes">
+          <button class="modebtn" data-deck="newDeck" data-mode="enru">EN → RU</button>
+          <button class="modebtn secondary" data-deck="newDeck" data-mode="ruen">RU → EN</button>
+        </div>
+      </div>
+      <div class="flashgrid">
+        
+        <article class="flipcard" data-en="steam-powered car" data-ru="машина на паровой тяге" data-ex="A steam-powered car needed water and time to heat up.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>steam-powered car</strong>
+              <button class="speak" data-say="steam-powered car">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>машина на паровой тяге</strong>
+              <small>A steam-powered car needed water and time to heat up.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="gasoline-powered car" data-ru="автомобиль на бензине" data-ex="Gasoline-powered cars became dominant in the 20th century.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>gasoline-powered car</strong>
+              <button class="speak" data-say="gasoline-powered car">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>автомобиль на бензине</strong>
+              <small>Gasoline-powered cars became dominant in the 20th century.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="battery-powered electric vehicle" data-ru="электромобиль на батарее" data-ex="A battery-powered electric vehicle was clean and quiet.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>battery-powered electric vehicle</strong>
+              <button class="speak" data-say="battery-powered electric vehicle">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>электромобиль на батарее</strong>
+              <small>A battery-powered electric vehicle was clean and quiet.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="internal combustion engine" data-ru="двигатель внутреннего сгорания" data-ex="Internal combustion engines ruled the roads for decades.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>internal combustion engine</strong>
+              <button class="speak" data-say="internal combustion engine">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>двигатель внутреннего сгорания</strong>
+              <small>Internal combustion engines ruled the roads for decades.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="hand-cranking" data-ru="ручной запуск двигателя" data-ex="Hand-cranking could be dangerous.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>hand-cranking</strong>
+              <button class="speak" data-say="hand-cranking">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>ручной запуск двигателя</strong>
+              <small>Hand-cranking could be dangerous.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="foul-smelling exhaust" data-ru="вонючие выхлопные газы" data-ex="Early gasoline cars produced foul-smelling exhaust.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>foul-smelling exhaust</strong>
+              <button class="speak" data-say="foul-smelling exhaust">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>вонючие выхлопные газы</strong>
+              <small>Early gasoline cars produced foul-smelling exhaust.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="access to electricity" data-ru="доступ к электричеству" data-ex="Electric cars were easier to use with access to electricity.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>access to electricity</strong>
+              <button class="speak" data-say="access to electricity">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>доступ к электричеству</strong>
+              <small>Electric cars were easier to use with access to electricity.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="expensive and inefficient" data-ru="дорогой и неэффективный" data-ex="Early batteries were expensive and inefficient.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>expensive and inefficient</strong>
+              <button class="speak" data-say="expensive and inefficient">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>дорогой и неэффективный</strong>
+              <small>Early batteries were expensive and inefficient.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="swap out dead batteries" data-ru="заменять разряженные батареи" data-ex="Some stations swapped out dead batteries.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>swap out dead batteries</strong>
+              <button class="speak" data-say="swap out dead batteries">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>заменять разряженные батареи</strong>
+              <small>Some stations swapped out dead batteries.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="charged ones" data-ru="заряженные" data-ex="Drivers wanted charged ones for longer trips.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>charged ones</strong>
+              <button class="speak" data-say="charged ones">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>заряженные</strong>
+              <small>Drivers wanted charged ones for longer trips.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="captured the public imagination" data-ru="захватил воображение публики" data-ex="The Model T captured the public imagination.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>captured the public imagination</strong>
+              <button class="speak" data-say="captured the public imagination">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>захватил воображение публики</strong>
+              <small>The Model T captured the public imagination.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="plummeted" data-ru="резко упал" data-ex="The share of electric cars plummeted.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>plummeted</strong>
+              <button class="speak" data-say="plummeted">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>резко упал</strong>
+              <small>The share of electric cars plummeted.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="alternative energy sources" data-ru="альтернативные источники энергии" data-ex="Oil problems renewed interest in alternative energy sources.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>alternative energy sources</strong>
+              <button class="speak" data-say="alternative energy sources">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>альтернативные источники энергии</strong>
+              <small>Oil problems renewed interest in alternative energy sources.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="car emissions" data-ru="автомобильные выбросы" data-ex="Car emissions caused smog in cities.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>car emissions</strong>
+              <button class="speak" data-say="car emissions">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>автомобильные выбросы</strong>
+              <small>Car emissions caused smog in cities.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="regulatory mandates" data-ru="регуляторные требования" data-ex="Regulatory mandates encouraged electric cars.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>regulatory mandates</strong>
+              <button class="speak" data-say="regulatory mandates">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>регуляторные требования</strong>
+              <small>Regulatory mandates encouraged electric cars.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="hybrid cars" data-ru="гибридные автомобили" data-ex="Hybrid cars use batteries to improve efficiency.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>hybrid cars</strong>
+              <button class="speak" data-say="hybrid cars">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>гибридные автомобили</strong>
+              <small>Hybrid cars use batteries to improve efficiency.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="single charge" data-ru="одна зарядка" data-ex="The Roadster travelled over 320 kilometres on a single charge.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>single charge</strong>
+              <button class="speak" data-say="single charge">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>одна зарядка</strong>
+              <small>The Roadster travelled over 320 kilometres on a single charge.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="upfront cost" data-ru="первоначальная стоимость" data-ex="Some electric cars have a high upfront cost.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>upfront cost</strong>
+              <button class="speak" data-say="upfront cost">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>первоначальная стоимость</strong>
+              <small>Some electric cars have a high upfront cost.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="replace gas-powered cars" data-ru="заменить бензиновые автомобили" data-ex="Electric cars may replace gas-powered cars.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>replace gas-powered cars</strong>
+              <button class="speak" data-say="replace gas-powered cars">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>заменить бензиновые автомобили</strong>
+              <small>Electric cars may replace gas-powered cars.</small>
+            </div>
+          </div>
+        </article>
+        <article class="flipcard" data-en="emission standards" data-ru="стандарты выбросов" data-ex="Emission standards can change the car market.">
+          <div class="flip-inner">
+            <div class="face front-face">
+              <span class="mode-label">EN → RU</span>
+              <strong>emission standards</strong>
+              <button class="speak" data-say="emission standards">🔊</button>
+            </div>
+            <div class="face back-face">
+              <span class="mode-label">Translation</span>
+              <strong>стандарты выбросов</strong>
+              <small>Emission standards can change the car market.</small>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div></section>
+
+<section class="module summary"><p class="eyebrow">Section 4</p><h2>Summary before watching</h2><div class="legend"><span class="old">highlighted expressions</span><span class="new">click for translation</span></div><p>Electric cars may seem like a modern invention, but their history is much longer. In 1899, drivers could choose between steam-powered, gasoline-powered and battery-powered cars. Electric vehicles were clean, quiet and easy to start, so they looked like a practical choice. <button class="word" data-en="However" data-ru="однако">However</button>, batteries were <button class="word" data-en="expensive and inefficient" data-ru="дорогой и неэффективный">expensive and inefficient</button>, <button class="word" data-en="while" data-ru="в то время как / хотя">while</button> gasoline became cheaper and the Model T became <button class="word" data-en="a huge success" data-ru="огромный успех">a huge success</button>. <button class="word" data-en="As a result" data-ru="в результате">As a result</button>, electric cars almost disappeared for several decades.
+
+Later, oil problems, air pollution and climate concerns brought electric cars back. Battery technology improved because portable electronics needed better batteries, and companies began to <button class="word" data-en="solve practical problems" data-ru="решать практические проблемы">solve practical problems</button> such as range and performance. Tesla&#x27;s Roadster <button class="word" data-en="captured the public imagination" data-ru="захватил воображение публики">captured the public imagination</button> because it could travel a long distance on a <button class="word" data-en="single charge" data-ru="одна зарядка">single charge</button>. Today, electric vehicles are improving in cost, availability and efficiency. <button class="word" data-en="In the long run" data-ru="в долгосрочной перспективе">In the long run</button>, they may <button class="word" data-en="replace gas-powered cars" data-ru="заменить бензиновые автомобили">replace gas-powered cars</button>, <button class="word" data-en="provided that" data-ru="при условии что">provided that</button> batteries, charging networks and government policies continue to develop.</p></section>
+
+<section class="module"><p class="eyebrow">Visual preview</p><h2>Key ideas</h2><div class="visuals"><article class="visual-card"><div class="icon">🚗</div><h3>1899 choices</h3><p>Steam, gasoline or electric?</p></article>
+<article class="visual-card"><div class="icon">🔋</div><h3>Battery problem</h3><p>Expensive and inefficient</p></article>
+<article class="visual-card"><div class="icon">🌱</div><h3>Comeback</h3><p>Oil, smog and better batteries</p></article>
+<article class="visual-card"><div class="icon">⚡</div><h3>Future transport</h3><p>Electric cars may replace petrol cars</p></article></div></section>
+
+
+    <section class="part" id="options" data-progress="part-options">
+      <div class="part-head">
+        <p class="eyebrow">Part · 00:06–01:16</p>
+        <h2>Three kinds of cars in 1899</h2>
+        <p class="preq"><strong>Think:</strong> If you lived in 1899, which car would you choose: steam, gasoline or electric?</p>
+        <p class="listen-note">Listen: 00:06–01:16</p>
+        <button class="jump" data-start="6">Play this part</button>
+      </div>
+      <div class="part-grid">
+        <article class="transcript"><h3>Transcript</h3><p>If you were buying a car in 1899, you would’ve had three major options to choose from. You could buy a <button class="word" data-en="steam-powered car" data-ru="машина на паровой тяге">steam-powered car</button>. Typically relying on gas-powered boilers, these could drive as far as you wanted— provided you also wanted to lug around extra water to refuel and didn’t mind waiting 30 minutes for your engine to heat up. <button class="word" data-en="Alternatively" data-ru="в качестве альтернативы">Alternatively</button>, you could buy a car powered by gasoline. <button class="word" data-en="However" data-ru="однако">However</button>, the <button class="word" data-en="internal combustion engines" data-ru="двигатели внутреннего сгорания">internal combustion engines</button> in these models required dangerous <button class="word" data-en="hand-cranking" data-ru="ручной запуск двигателя">hand-cranking</button> to start and emitted loud noises and <button class="word" data-en="foul-smelling exhaust" data-ru="вонючие выхлопные газы">foul-smelling exhaust</button> <button class="word" data-en="while" data-ru="в то время как / хотя">while</button> driving. So your best bet was probably option number three: a <button class="word" data-en="battery-powered electric vehicle" data-ru="электромобиль на батарее">battery-powered electric vehicle</button>. These cars were quick to start, clean and quiet to run, and if you lived somewhere with <button class="word" data-en="access to electricity" data-ru="доступ к электричеству">access to electricity</button>, easy to refuel overnight. If this seems like an easy choice, you&#x27;re not alone. By the end of the 19th century, nearly 40% of American cars were electric. In cities with early electric systems, battery-powered cars were a popular and reliable alternative to their occasionally explosive competitors.</p></article>
+        <aside class="after"><h3>After this part</h3><p>This part explains that electric cars were not a new invention. In 1899, buyers could choose between <button class="word" data-en="steam-powered car" data-ru="машина на паровой тяге">steam-powered car</button>s, <button class="word" data-en="gasoline-powered car" data-ru="автомобиль на бензине">gasoline-powered car</button>s and <button class="word" data-en="battery-powered electric vehicle" data-ru="электромобиль на батарее">battery-powered electric vehicle</button>s. Electric cars looked attractive because they were clean, quiet and easy to start. <button class="word" data-en="However" data-ru="однако">However</button>, this advantage depended on <button class="word" data-en="access to electricity" data-ru="доступ к электричеству">access to electricity</button>.</p><h4>Useful expressions</h4><div class="pills"><button class="pill speak" data-say="steam-powered car">steam-powered car 🔊</button><button class="pill speak" data-say="gasoline-powered car">gasoline-powered car 🔊</button><button class="pill speak" data-say="battery-powered electric vehicle">battery-powered electric vehicle 🔊</button><button class="pill speak" data-say="internal combustion engine">internal combustion engine 🔊</button><button class="pill speak" data-say="hand-cranking">hand-cranking 🔊</button><button class="pill speak" data-say="foul-smelling exhaust">foul-smelling exhaust 🔊</button><button class="pill speak" data-say="access to electricity">access to electricity 🔊</button></div></aside>
+      </div>
+      <div class="tasks">
+        <h3>Listening check</h3>
+        <div class="quizq"><p>1. Which three car types are mentioned?</p><div class="opts"><label><input type='radio' name='options_0' value='0' data-answer='3'> Diesel, solar and electric cars</label><label><input type='radio' name='options_0' value='1' data-answer='3'> Bicycles, buses and trains</label><label><input type='radio' name='options_0' value='2' data-answer='3'> Planes, ships and scooters</label><label><input type='radio' name='options_0' value='3' data-answer='3'> Steam, gasoline and electric cars</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>2. Why were early gasoline cars unpleasant?</p><div class="opts"><label><input type='radio' name='options_1' value='0' data-answer='3'> They had no wheels</label><label><input type='radio' name='options_1' value='1' data-answer='3'> They were too easy to refuel</label><label><input type='radio' name='options_1' value='2' data-answer='3'> They were quiet and slow</label><label><input type='radio' name='options_1' value='3' data-answer='3'> They needed dangerous hand-cranking and produced loud noise and exhaust</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>3. Why did electric cars seem like a good choice?</p><div class="opts"><label><input type='radio' name='options_2' value='0' data-answer='1'> They needed no battery</label><label><input type='radio' name='options_2' value='1' data-answer='1'> They were quick to start, clean and quiet</label><label><input type='radio' name='options_2' value='2' data-answer='1'> They were the cheapest cars in every city</label><label><input type='radio' name='options_2' value='3' data-answer='1'> They could fly above the road</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+        <h3>Sentence practice</h3>
+        <div class="grid two"><div class="gap"><p>In 1899, buyers could choose a steam-powered car, a gasoline car, or a ______ electric vehicle.</p><input data-answer="battery-powered" placeholder="Type one word or phrase"><button class="check-one">Check</button><button class="show-one">Show</button><span class="fb"></span></div></div>
+      </div>
+      <div class="discussion"><h3>Speak</h3><p>Use two expressions from this part. Give your opinion in 4–6 sentences.</p><textarea placeholder="Plan your answer..."></textarea></div>
+      <button class="complete">Mark this part complete</button>
+    </section>
+    <section class="part" id="decline" data-progress="part-decline">
+      <div class="part-head">
+        <p class="eyebrow">Part · 01:16–02:31</p>
+        <h2>Why electric cars disappeared</h2>
+        <p class="preq"><strong>Think:</strong> What problem could make a promising technology disappear?</p>
+        <p class="listen-note">Listen: 01:16–02:31</p>
+        <button class="jump" data-start="76">Play this part</button>
+      </div>
+      <div class="part-grid">
+        <article class="transcript"><h3>Transcript</h3><p>But electric vehicles had one major problem— batteries. Early car batteries were <button class="word" data-en="expensive and inefficient" data-ru="дорогой и неэффективный">expensive and inefficient</button>. Many inventors, including Thomas Edison, tried to build batteries that stored more electricity. Others even built <button class="word" data-en="exchange stations" data-ru="станции замены">exchange stations</button> in urban areas to <button class="word" data-en="swap out dead batteries" data-ru="заменять разряженные батареи">swap out dead batteries</button> for <button class="word" data-en="charged ones" data-ru="заряженные батареи">charged ones</button>. But these measures weren’t enough to allow electric vehicles to make long trips. And at over twice the price of a gas-powered car, many couldn’t afford these luxury items. <button class="word" data-en="At the same time" data-ru="в то же время">At the same time</button>, oil discoveries lowered the price of gasoline, and new advances made <button class="word" data-en="internal combustion engines" data-ru="двигатели внутреннего сгорания">internal combustion engines</button> more appealing. Electric starters removed the need for <button class="word" data-en="hand-cranking" data-ru="ручной запуск двигателя">hand-cranking</button>, mufflers made engines quieter and rubber engine mounts reduced vibration. In 1908, Ford released the Model T; a cheap, high-quality gas-powered car that <button class="word" data-en="captured the public imagination" data-ru="захватил воображение публики">captured the public imagination</button>. By 1915, the percentage of electric cars on the road had <button class="word" data-en="plummeted" data-ru="резко упал">plummeted</button>. For the next 55 years, <button class="word" data-en="internal combustion engines" data-ru="двигатели внутреннего сгорания">internal combustion engines</button> ruled the roads. Aside from some special-purpose vehicles, electric cars were nowhere to be found.</p></article>
+        <aside class="after"><h3>After this part</h3><p>This part shows why electric cars lost their early popularity. Batteries were <button class="word" data-en="expensive and inefficient" data-ru="дорогой и неэффективный">expensive and inefficient</button>, <button class="word" data-en="while" data-ru="в то время как / хотя">while</button> gasoline became cheaper. The Model T was <button class="word" data-en="a huge success" data-ru="огромный успех">a huge success</button> because it was cheap, reliable and <button class="word" data-en="captured the public imagination" data-ru="захватил воображение публики">captured the public imagination</button>. <button class="word" data-en="As a result" data-ru="в результате">As a result</button>, electric cars almost disappeared from ordinary roads for many decades.</p><h4>Useful expressions</h4><div class="pills"><button class="pill speak" data-say="expensive and inefficient">expensive and inefficient 🔊</button><button class="pill speak" data-say="exchange stations">exchange stations 🔊</button><button class="pill speak" data-say="swap out dead batteries">swap out dead batteries 🔊</button><button class="pill speak" data-say="charged ones">charged ones 🔊</button><button class="pill speak" data-say="afford luxury items">afford luxury items 🔊</button><button class="pill speak" data-say="internal combustion engines">internal combustion engines 🔊</button><button class="pill speak" data-say="captured the public imagination">captured the public imagination 🔊</button><button class="pill speak" data-say="plummeted">plummeted 🔊</button></div></aside>
+      </div>
+      <div class="tasks">
+        <h3>Listening check</h3>
+        <div class="quizq"><p>1. What was the major problem with early electric cars?</p><div class="opts"><label><input type='radio' name='decline_0' value='0' data-answer='3'> They had no seats</label><label><input type='radio' name='decline_0' value='1' data-answer='3'> They were too noisy</label><label><input type='radio' name='decline_0' value='2' data-answer='3'> They used too much gasoline</label><label><input type='radio' name='decline_0' value='3' data-answer='3'> Their batteries were expensive and inefficient</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>2. What did exchange stations try to do?</p><div class="opts"><label><input type='radio' name='decline_1' value='0' data-answer='2'> Repair horses</label><label><input type='radio' name='decline_1' value='1' data-answer='2'> Produce gasoline</label><label><input type='radio' name='decline_1' value='2' data-answer='2'> Swap dead batteries for charged ones</label><label><input type='radio' name='decline_1' value='3' data-answer='2'> Sell train tickets</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>3. Why was the Model T important?</p><div class="opts"><label><input type='radio' name='decline_2' value='0' data-answer='1'> It was powered by steam only</label><label><input type='radio' name='decline_2' value='1' data-answer='1'> It was a cheap, high-quality gas-powered car</label><label><input type='radio' name='decline_2' value='2' data-answer='1'> It was the first flying train</label><label><input type='radio' name='decline_2' value='3' data-answer='1'> It used no engine</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+        <h3>Sentence practice</h3>
+        <div class="grid two"><div class="gap"><p>By 1915, the percentage of electric cars on the road had ______.</p><input data-answer="plummeted" placeholder="Type one word or phrase"><button class="check-one">Check</button><button class="show-one">Show</button><span class="fb"></span></div></div>
+      </div>
+      <div class="discussion"><h3>Speak</h3><p>Use two expressions from this part. Give your opinion in 4–6 sentences.</p><textarea placeholder="Plan your answer..."></textarea></div>
+      <button class="complete">Mark this part complete</button>
+    </section>
+    <section class="part" id="return" data-progress="part-return">
+      <div class="part-head">
+        <p class="eyebrow">Part · 02:31–03:52</p>
+        <h2>The return of electric vehicles</h2>
+        <p class="preq"><strong>Think:</strong> What can make people return to an old idea?</p>
+        <p class="listen-note">Listen: 02:31–03:52</p>
+        <button class="jump" data-start="151">Play this part</button>
+      </div>
+      <div class="part-grid">
+        <article class="transcript"><h3>Transcript</h3><p><button class="word" data-en="However" data-ru="однако">However</button>, in the 1970s, <button class="word" data-en="the tide began to turn" data-ru="ситуация начала меняться">the tide began to turn</button>. US concerns about <button class="word" data-en="oil availability" data-ru="доступность нефти">oil availability</button> renewed interest in <button class="word" data-en="alternative energy sources" data-ru="альтернативные источники энергии">alternative energy sources</button>. And studies in the 1980s linking <button class="word" data-en="car emissions" data-ru="автомобильные выбросы">car emissions</button> with <button class="word" data-en="smog" data-ru="смог">smog</button> in cities like Los Angeles encouraged governments and environmental organizations to reconsider electric vehicles. At this point, car companies had spent decades investing in <button class="word" data-en="internal combustion engines" data-ru="двигатели внутреннего сгорания">internal combustion engines</button> without devoting any resources to solving the century-old battery problem. But other companies were developing increasingly efficient batteries to power a new wave of portable electronics. By the 1990s, energy dense nickel metal hydride batteries were on the market, soon followed by lithium-ion batteries. Alongside <button class="word" data-en="regulatory mandates" data-ru="регуляторные требования">regulatory mandates</button> by California to reduce <button class="word" data-en="smog" data-ru="смог">smog</button>, these innovations sparked a small wave of new electric vehicles, including <button class="word" data-en="hybrid cars" data-ru="гибридные автомобили">hybrid cars</button>. Hybrids aren’t true electric vehicles; their nickel metal hydride batteries are only used to optimize the efficiency of gas-burning engines. But in 2008, Tesla Motors went further, grabbing the attention of consumers, automakers, and regulators with its lithium-ion-powered Roadster.</p></article>
+        <aside class="after"><h3>After this part</h3><p>This part explains how electric vehicles returned. Oil concerns, urban <button class="word" data-en="smog" data-ru="смог">smog</button> and environmental regulation renewed interest in cleaner transport. <button class="word" data-en="At the same time" data-ru="в то же время">At the same time</button>, battery technology improved because portable electronics needed better batteries. <button class="word" data-en="Hybrid cars" data-ru="гибридные автомобили">Hybrid cars</button> and then Tesla&#x27;s Roadster helped electric vehicles become visible again.</p><h4>Useful expressions</h4><div class="pills"><button class="pill speak" data-say="the tide began to turn">the tide began to turn 🔊</button><button class="pill speak" data-say="oil availability">oil availability 🔊</button><button class="pill speak" data-say="alternative energy sources">alternative energy sources 🔊</button><button class="pill speak" data-say="car emissions">car emissions 🔊</button><button class="pill speak" data-say="smog">smog 🔊</button><button class="pill speak" data-say="regulatory mandates">regulatory mandates 🔊</button><button class="pill speak" data-say="hybrid cars">hybrid cars 🔊</button><button class="pill speak" data-say="single charge">single charge 🔊</button></div></aside>
+      </div>
+      <div class="tasks">
+        <h3>Listening check</h3>
+        <div class="quizq"><p>1. What renewed interest in alternative energy sources?</p><div class="opts"><label><input type='radio' name='return_0' value='0' data-answer='3'> A new fashion for bicycles</label><label><input type='radio' name='return_0' value='1' data-answer='3'> Lower coffee prices</label><label><input type='radio' name='return_0' value='2' data-answer='3'> Better horse transport</label><label><input type='radio' name='return_0' value='3' data-answer='3'> Concerns about oil availability</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>2. What environmental problem is mentioned?</p><div class="opts"><label><input type='radio' name='return_1' value='0' data-answer='2'> Cold weather</label><label><input type='radio' name='return_1' value='1' data-answer='2'> Water pollution from trains</label><label><input type='radio' name='return_1' value='2' data-answer='2'> Smog from car emissions</label><label><input type='radio' name='return_1' value='3' data-answer='2'> Noisy birds</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>3. Why were new batteries important?</p><div class="opts"><label><input type='radio' name='return_2' value='0' data-answer='1'> They stopped people using phones</label><label><input type='radio' name='return_2' value='1' data-answer='1'> They made more practical electric vehicles possible</label><label><input type='radio' name='return_2' value='2' data-answer='1'> They removed all cars from roads</label><label><input type='radio' name='return_2' value='3' data-answer='1'> They made gasoline cheaper</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+        <h3>Sentence practice</h3>
+        <div class="grid two"><div class="gap"><p>Tesla&#x27;s Roadster could travel more than 320 kilometres on a ______ charge.</p><input data-answer="single" placeholder="Type one word or phrase"><button class="check-one">Check</button><button class="show-one">Show</button><span class="fb"></span></div></div>
+      </div>
+      <div class="discussion"><h3>Speak</h3><p>Use two expressions from this part. Give your opinion in 4–6 sentences.</p><textarea placeholder="Plan your answer..."></textarea></div>
+      <button class="complete">Mark this part complete</button>
+    </section>
+    <section class="part" id="future" data-progress="part-future">
+      <div class="part-head">
+        <p class="eyebrow">Part · 03:52–04:58</p>
+        <h2>Electric cars and future transport</h2>
+        <p class="preq"><strong>Think:</strong> Will most people drive electric cars in the future?</p>
+        <p class="listen-note">Listen: 03:52–04:58</p>
+        <button class="jump" data-start="232">Play this part</button>
+      </div>
+      <div class="part-grid">
+        <article class="transcript"><h3>Transcript</h3><p>This purely electric vehicle could travel more than 320 kilometers on a <button class="word" data-en="single charge" data-ru="одна зарядка">single charge</button>, almost doubling the previous record. Since then, electric vehicles have vastly improved in cost, performance, efficiency, and availability. They can accelerate much faster than gas-powered sports cars, and <button class="word" data-en="while" data-ru="в то время как / хотя">while</button> some models still have a high <button class="word" data-en="upfront cost" data-ru="первоначальная стоимость">upfront cost</button>, they reliably save their drivers money <button class="word" data-en="in the long run" data-ru="в долгосрочной перспективе">in the long run</button>. As governments around the world focus on slowing climate change, electric vehicles are now expected to <button class="word" data-en="replace gas-powered ones" data-ru="заменить бензиновые автомобили">replace gas-powered ones</button> altogether. In Norway, 75% of car sales in 2020 were <button class="word" data-en="plug-in electric vehicles" data-ru="подключаемые электромобили">plug-in electric vehicles</button>. And policies such as California’s Zero Emission Vehicle mandate and Europe’s aggressive CO2 <button class="word" data-en="emission standards" data-ru="стандарты выбросов">emission standards</button> have dramatically slowed investments in gas-powered vehicles worldwide. Soon, electric cars will <button class="word" data-en="reclaim their place" data-ru="вернуть своё место">reclaim their place</button> on the road, putting gasoline in our rearview.</p></article>
+        <aside class="after"><h3>After this part</h3><p>This final part connects directly with future predictions. Electric vehicles have improved in cost, performance and availability. They may <button class="word" data-en="replace gas-powered cars" data-ru="заменить бензиновые автомобили">replace gas-powered cars</button> altogether, <button class="word" data-en="provided that" data-ru="при условии что">provided that</button> batteries, charging networks and government policies continue to improve. <button class="word" data-en="In the long run" data-ru="в долгосрочной перспективе">In the long run</button>, electric cars may <button class="word" data-en="put gasoline in our rearview" data-ru="оставить бензин в прошлом">put gasoline in our rearview</button>.</p><h4>Useful expressions</h4><div class="pills"><button class="pill speak" data-say="upfront cost">upfront cost 🔊</button><button class="pill speak" data-say="in the long run">in the long run 🔊</button><button class="pill speak" data-say="slow climate change">slow climate change 🔊</button><button class="pill speak" data-say="replace gas-powered ones">replace gas-powered ones 🔊</button><button class="pill speak" data-say="plug-in electric vehicles">plug-in electric vehicles 🔊</button><button class="pill speak" data-say="emission standards">emission standards 🔊</button><button class="pill speak" data-say="reclaim their place">reclaim their place 🔊</button><button class="pill speak" data-say="put gasoline in our rearview">put gasoline in our rearview 🔊</button></div></aside>
+      </div>
+      <div class="tasks">
+        <h3>Listening check</h3>
+        <div class="quizq"><p>1. How have electric vehicles improved?</p><div class="opts"><label><input type='radio' name='future_0' value='0' data-answer='3'> Only in colour</label><label><input type='radio' name='future_0' value='1' data-answer='3'> Only in size</label><label><input type='radio' name='future_0' value='2' data-answer='3'> Only in engine noise</label><label><input type='radio' name='future_0' value='3' data-answer='3'> In cost, performance, efficiency and availability</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>2. What country had 75% plug-in electric car sales in 2020?</p><div class="opts"><label><input type='radio' name='future_1' value='0' data-answer='2'> Brazil</label><label><input type='radio' name='future_1' value='1' data-answer='2'> India</label><label><input type='radio' name='future_1' value='2' data-answer='2'> Norway</label><label><input type='radio' name='future_1' value='3' data-answer='2'> Japan</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>3. What does &#x27;putting gasoline in our rearview&#x27; mean?</p><div class="opts"><label><input type='radio' name='future_2' value='0' data-answer='1'> Looking at a petrol station</label><label><input type='radio' name='future_2' value='1' data-answer='1'> Leaving gasoline cars behind</label><label><input type='radio' name='future_2' value='2' data-answer='1'> Buying more gasoline</label><label><input type='radio' name='future_2' value='3' data-answer='1'> Driving only backwards</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+        <h3>Sentence practice</h3>
+        <div class="grid two"><div class="gap"><p>Electric vehicles are now expected to ______ gas-powered ones.</p><input data-answer="replace" placeholder="Type one word or phrase"><button class="check-one">Check</button><button class="show-one">Show</button><span class="fb"></span></div></div>
+      </div>
+      <div class="discussion"><h3>Speak</h3><p>Use two expressions from this part. Give your opinion in 4–6 sentences.</p><textarea placeholder="Plan your answer..."></textarea></div>
+      <button class="complete">Mark this part complete</button>
+    </section>
+
+<section class="module" id="discussion"><p class="eyebrow">Extra discussion</p><h2>Questions for conversation</h2><p class="lead">Answer the questions. Try to use two collocations and one linking word.</p><div class="discussion-grid"><article class="discussion-card"><h3>1. Will most people drive electric cars in the future?</h3><p>Recommended collocations:</p><div class="pills"><button class="pill speak" data-say="provided that charging becomes easier">provided that charging becomes easier 🔊</button><button class="pill speak" data-say="replace gas-powered cars">replace gas-powered cars 🔊</button><button class="pill speak" data-say="in the long run">in the long run 🔊</button><button class="pill speak" data-say="make an informed choice">make an informed choice 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></article>
+<article class="discussion-card"><h3>2. Will petrol cars disappear completely?</h3><p>Recommended collocations:</p><div class="pills"><button class="pill speak" data-say="unless prices fall">unless prices fall 🔊</button><button class="pill speak" data-say="emission standards">emission standards 🔊</button><button class="pill speak" data-say="gasoline-powered cars">gasoline-powered cars 🔊</button><button class="pill speak" data-say="gradual replacement">gradual replacement 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></article>
+<article class="discussion-card"><h3>3. Are electric cars really greener?</h3><p>Recommended collocations:</p><div class="pills"><button class="pill speak" data-say="car emissions">car emissions 🔊</button><button class="pill speak" data-say="alternative energy sources">alternative energy sources 🔊</button><button class="pill speak" data-say="a vital component">a vital component 🔊</button><button class="pill speak" data-say="environmental impact">environmental impact 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></article>
+<article class="discussion-card"><h3>4. Would you buy an electric car?</h3><p>Recommended collocations:</p><div class="pills"><button class="pill speak" data-say="upfront cost">upfront cost 🔊</button><button class="pill speak" data-say="save money in the long run">save money in the long run 🔊</button><button class="pill speak" data-say="access to electricity">access to electricity 🔊</button><button class="pill speak" data-say="a practical choice">a practical choice 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></article>
+<article class="discussion-card"><h3>5. Why do some good technologies fail at first?</h3><p>Recommended collocations:</p><div class="pills"><button class="pill speak" data-say="expensive and inefficient">expensive and inefficient 🔊</button><button class="pill speak" data-say="capture the public imagination">capture the public imagination 🔊</button><button class="pill speak" data-say="develop in unexpected directions">develop in unexpected directions 🔊</button><button class="pill speak" data-say="solve practical problems">solve practical problems 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></article>
+<article class="discussion-card"><h3>6. What transport prediction from the textbook seems most realistic?</h3><p>Recommended collocations:</p><div class="pills"><button class="pill speak" data-say="future transport">future transport 🔊</button><button class="pill speak" data-say="provided that technology improves">provided that technology improves 🔊</button><button class="pill speak" data-say="in the near future">in the near future 🔊</button><button class="pill speak" data-say="make an informed choice">make an informed choice 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></article>
+<article class="discussion-card"><h3>7. Should governments force car companies to reduce emissions?</h3><p>Recommended collocations:</p><div class="pills"><button class="pill speak" data-say="regulatory mandates">regulatory mandates 🔊</button><button class="pill speak" data-say="emission standards">emission standards 🔊</button><button class="pill speak" data-say="slow climate change">slow climate change 🔊</button><button class="pill speak" data-say="a long-term commitment">a long-term commitment 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></article>
+<article class="discussion-card"><h3>8. What technology might replace today&#x27;s cars?</h3><p>Recommended collocations:</p><div class="pills"><button class="pill speak" data-say="alternative energy sources">alternative energy sources 🔊</button><button class="pill speak" data-say="complex systems">complex systems 🔊</button><button class="pill speak" data-say="still in development">still in development 🔊</button><button class="pill speak" data-say="a huge success">a huge success 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></article></div></section>
+
+<section class="module" id="final"><p class="eyebrow">Final task</p><h2>1-minute answer</h2><p>Answer this question: <strong>Will most people drive electric cars in the future?</strong></p><p>Use at least five expressions:</p><div class="pills"><button class="pill speak" data-say="provided that">provided that 🔊</button><button class="pill speak" data-say="unless">unless 🔊</button><button class="pill speak" data-say="in the long run">in the long run 🔊</button><button class="pill speak" data-say="replace gas-powered cars">replace gas-powered cars 🔊</button><button class="pill speak" data-say="upfront cost">upfront cost 🔊</button><button class="pill speak" data-say="emission standards">emission standards 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></section>
+</main>
+
+<div class="progress"><strong>Progress</strong><div class="bar"><span id="bar"></span></div><small id="progressText">0 sections complete</small></div>
+<div class="tooltip" id="tip"><strong id="tipEn"></strong><div class="ru" id="tipRu"></div><button class="speak" id="tipSpeak">Listen</button><button id="tipClose">Close</button></div>
+
+<script>
+const completedKey='electric_cars_workshop_progress_v2';
+const completed=new Set(JSON.parse(localStorage.getItem(completedKey)||'[]'));
+function saveProgress(){localStorage.setItem(completedKey,JSON.stringify([...completed]));updateProgress();}
+function updateProgress(){const total=document.querySelectorAll('.part').length;const done=completed.size;document.getElementById('bar').style.width=(done/total*100)+'%';document.getElementById('progressText').textContent=done+' / '+total+' video parts complete';}
+document.querySelectorAll('.complete').forEach(btn=>btn.onclick=()=>{const p=btn.closest('.part').dataset.progress;completed.add(p);btn.textContent='Completed';saveProgress();});
+document.querySelectorAll('.part').forEach(p=>{if(completed.has(p.dataset.progress)){const b=p.querySelector('.complete');if(b)b.textContent='Completed';}});
+updateProgress();
+
+function speak(text){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.86;speechSynthesis.speak(u);}
+document.addEventListener('click',e=>{const b=e.target.closest('.speak');if(b&&b.dataset.say){e.stopPropagation();speak(b.dataset.say);}});
+document.querySelectorAll('.flipcard').forEach(card=>card.addEventListener('click',()=>card.classList.toggle('flipped')));
+
+function setDeckMode(deckId, mode){
+  const deck=document.getElementById(deckId);
+  if(!deck) return;
+  deck.querySelectorAll('.modebtn').forEach(b=>b.classList.toggle('secondary', b.dataset.mode!==mode));
+  deck.querySelectorAll('.flipcard').forEach(card=>{
+    card.classList.remove('flipped');
+    const en=card.dataset.en, ru=card.dataset.ru, ex=card.dataset.ex;
+    const front=card.querySelector('.front-face');
+    const back=card.querySelector('.back-face');
+    if(mode==='ruen'){
+      front.innerHTML=`<span class="mode-label">RU → EN</span><strong>${ru}</strong>`;
+      back.innerHTML=`<span class="mode-label">English</span><strong>${en}</strong><button class="speak" data-say="${en.replaceAll('"','&quot;')}">🔊</button><small>${ex}</small>`;
+    } else {
+      front.innerHTML=`<span class="mode-label">EN → RU</span><strong>${en}</strong><button class="speak" data-say="${en.replaceAll('"','&quot;')}">🔊</button>`;
+      back.innerHTML=`<span class="mode-label">Translation</span><strong>${ru}</strong><small>${ex}</small>`;
+    }
+  });
+}
+document.querySelectorAll('.modebtn').forEach(btn=>btn.addEventListener('click',()=>setDeckMode(btn.dataset.deck,btn.dataset.mode)));
+
+const tip=document.getElementById('tip'), tipEn=document.getElementById('tipEn'), tipRu=document.getElementById('tipRu');let current='';
+document.addEventListener('click',e=>{const w=e.target.closest('.word');if(w){current=w.dataset.en;tipEn.textContent=w.dataset.en;tipRu.textContent=w.dataset.ru||'';tip.style.display='block';}});
+document.getElementById('tipSpeak').onclick=()=>current&&speak(current);
+document.getElementById('tipClose').onclick=()=>tip.style.display='none';
+
+document.querySelectorAll('.check-radio').forEach(btn=>btn.onclick=()=>{const q=btn.closest('.quizq');const chosen=q.querySelector('input:checked');const fb=q.querySelector('.fb');if(!chosen){fb.textContent='Choose an answer.';fb.className='fb bad';return;} if(chosen.value===chosen.dataset.answer){fb.textContent='Correct.';fb.className='fb ok';} else {fb.textContent='Try again.';fb.className='fb bad';}});
+document.querySelectorAll('.check-one').forEach(btn=>btn.onclick=()=>{const box=btn.closest('.gap');const input=box.querySelector('input');const ans=(input.dataset.answer||'').trim().toLowerCase();const val=input.value.trim().toLowerCase();const fb=box.querySelector('.fb');if(val===ans){fb.textContent='Correct.';fb.className='fb ok';}else{fb.textContent='Try again.';fb.className='fb bad';}});
+document.querySelectorAll('.show-one').forEach(btn=>btn.onclick=()=>{const box=btn.closest('.gap');const input=box.querySelector('input');input.value=input.dataset.answer;const fb=box.querySelector('.fb');fb.textContent='Answer shown.';fb.className='fb ok';});
+document.querySelectorAll('.jump').forEach(btn=>btn.onclick=()=>{const iframe=document.getElementById('yt');iframe.src='https://www.youtube.com/embed/-EG6rqA2vvA?start='+btn.dataset.start+'&autoplay=1&rel=0';document.getElementById('video').scrollIntoView({behavior:'smooth'});});
+</script>
+</body>
+</html>

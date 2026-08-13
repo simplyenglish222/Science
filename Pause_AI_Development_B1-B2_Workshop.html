@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pause AI Development · B1–B2 Video Workshop</title>
+<style>
+:root{
+  --bg:#f2f4f7;--paper:#fffdf8;--ink:#1f2933;--muted:#66747b;--line:#d9e2e8;--brand:#263a72;--brand2:#b34d3f;--soft:#e9eefb;--soft2:#fff0e7;--ok:#2f7d55;--bad:#b34545;
+  --shadow:0 18px 50px rgba(30,42,66,.12);--radius:26px;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font:16px/1.62 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#e9eefb,#f8fbfc 35%,#f2f4f7);color:var(--ink)}
+button,input,textarea{font:inherit}button{cursor:pointer}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,253,248,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{max-width:1180px;margin:auto;padding:12px 18px;display:flex;gap:12px;justify-content:space-between;align-items:center}.logo{font-weight:900;color:var(--brand)}.navlinks{display:flex;gap:8px;flex-wrap:wrap}.navlinks a{text-decoration:none;color:var(--ink);font-size:13px;font-weight:800;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:white}
+.hero{background:radial-gradient(circle at 22% 20%,rgba(255,255,255,.18),transparent 24%),linear-gradient(135deg,#12172c,#263a72 58%,#b34d3f);color:white;overflow:hidden}
+.hero-inner{max-width:1180px;margin:auto;padding:64px 18px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+h1{font-size:clamp(38px,6vw,70px);line-height:.96;margin:0 0 16px;letter-spacing:-.05em}.hero p{font-size:19px;color:#f2f6ff;max-width:760px}.badges{display:flex;gap:9px;flex-wrap:wrap}.badge{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);font-weight:850;font-size:13px}
+.video-card{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.30);border-radius:28px;padding:14px;box-shadow:0 20px 50px rgba(0,0,0,.23)}.video-wrap{position:relative;padding-top:56.25%;border-radius:18px;overflow:hidden;background:#111}.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+main{max-width:1180px;margin:auto;padding:32px 18px 90px}section.module,.part{background:linear-gradient(180deg,#fffdf8,#fffaf2);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;margin:24px 0}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;color:var(--brand2);font-size:12px;font-weight:900;margin:0 0 8px}h2{font-size:clamp(28px,3vw,42px);line-height:1.08;margin:0 0 12px;letter-spacing:-.035em}h3{font-size:22px;margin:0 0 12px}.lead{font-size:18px;color:var(--muted);max-width:850px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid.two{grid-template-columns:repeat(2,1fr)}.gap,.quizq,.discussion-card,.build,.mini-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:17px;box-shadow:0 10px 24px rgba(30,42,66,.06)}
+.deck-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.modes{display:flex;gap:8px;flex-wrap:wrap}.modebtn{border:0;border-radius:999px;background:var(--brand);color:white;padding:8px 12px;font-weight:850}.modebtn.secondary{background:#f2ebe2;color:var(--ink);border:1px solid var(--line)}
+.flashgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.flipcard{height:190px;perspective:1000px;cursor:pointer}.flip-inner{position:relative;width:100%;height:100%;transition:.45s;transform-style:preserve-3d}.flipcard.flipped .flip-inner{transform:rotateY(180deg)}.face{position:absolute;inset:0;backface-visibility:hidden;border:1px solid var(--line);border-radius:20px;background:#fff;padding:18px;display:flex;flex-direction:column;justify-content:center;gap:10px;box-shadow:0 10px 24px rgba(30,42,66,.06)}.back-face{transform:rotateY(180deg);background:var(--soft)}.face strong{font-size:18px;line-height:1.25}.face small{color:var(--muted)}.mode-label{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--brand2);font-weight:900}
+.speak,.jump,.check-radio,.check-one,.show-one,.complete,.check-build,.clear-build,.show-build,.repeat-btn{border:0;border-radius:999px;background:var(--brand);color:white;padding:8px 12px;font-weight:850;line-height:1.1}.speak{padding:7px 9px;width:max-content}.show-one,.clear-build,.show-build,.modebtn.secondary{background:#f2ebe2;color:var(--ink);border:1px solid var(--line)}
+.summary{font-size:18px;background:linear-gradient(180deg,#fff,#fff7ee);border-left:6px solid var(--brand2)}.word{border:0;border-radius:8px;padding:1px 5px;font-weight:850;color:var(--ink);display:inline;line-height:1.6;background:#e4e9fb;cursor:help}
+.part-head{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start}.preq{grid-column:1/-1;background:var(--soft2);border:1px solid #efd4bd;border-radius:18px;padding:12px 14px;margin:4px 0}.listen-note{grid-column:1/-1;display:inline-block;width:max-content;max-width:100%;padding:8px 12px;border-radius:999px;background:#1f2933;color:white;font-weight:900}
+.part-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin-top:20px}.transcript,.after{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px}.transcript p{margin:0 0 14px}.after{background:#f8fbfb}.pills{display:flex;flex-wrap:wrap;gap:8px}.pill{background:#fff;color:var(--brand);border:1px solid var(--line)}
+.opts{display:grid;gap:8px;margin:10px 0}.opts label{display:block;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:#fffdfa}.fb{font-weight:850;margin-left:10px}.fb.ok{color:var(--ok)}.fb.bad{color:var(--bad)}input,.gap input,textarea{width:100%;border:1px solid var(--line);border-radius:14px;background:white;padding:12px 14px;margin:8px 0 10px}textarea{min-height:88px;resize:vertical}
+.trainer-box{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:16px}.trainer-phrase{font-size:24px;font-weight:900}.trainer-ru{color:var(--muted);font-weight:800}.counter{font-weight:900;color:var(--brand2)}
+.wordbank,.answerline{display:flex;gap:8px;flex-wrap:wrap;min-height:52px;padding:10px;border:1px dashed var(--line);border-radius:16px;background:#fbfdff;margin:10px 0}.token{border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);padding:8px 12px;font-weight:850}.answerline .token{background:var(--soft)}.build h3{font-size:18px}
+.discussion{background:#fff7ed;border:1px solid #efd4bd;border-radius:20px;margin-top:20px;padding:20px}.discussion-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px}.discussion-card h3{font-size:18px}
+.progress{position:fixed;right:16px;bottom:16px;z-index:60;background:rgba(255,253,248,.96);border:1px solid var(--line);border-radius:18px;padding:12px 14px;box-shadow:var(--shadow);width:220px}.bar{height:9px;background:#eadfce;border-radius:999px;overflow:hidden;margin:8px 0}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:.3s}.progress small{color:var(--muted)}
+.tooltip{position:fixed;z-index:100;left:50%;bottom:84px;transform:translateX(-50%);max-width:420px;background:#12282f;color:white;border-radius:18px;padding:16px;box-shadow:var(--shadow);display:none}.tooltip strong{display:block;font-size:18px}.tooltip .ru{color:#ffd7b4;margin:4px 0 8px}.tooltip button{background:#fff;color:#12282f}
+@media(max-width:860px){.hero-inner,.part-grid,.grid,.grid.two,.discussion-grid,.flashgrid,.trainer-box{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}.part-head{grid-template-columns:1fr}.jump{width:max-content}.progress{left:10px;right:10px;bottom:10px;width:auto}main{padding-bottom:120px}section.module,.part{padding:20px}}
+</style>
+</head>
+<body>
+<header class="topbar"><nav class="nav"><div class="logo">Video Workshop · AI Safety</div><div class="navlinks"><a href="#phrases">Phrases</a><a href="#trainer">Trainer</a><a href="#summary">Summary</a><a href="#intro">Parts</a><a href="#discussion">Discussion</a></div></nav></header>
+
+<section class="hero" id="video"><div class="hero-inner"><div><p class="eyebrow">AI · risk · argument</p><h1>We Must Pause AI Development</h1><p>Practise powerful phrases from a formal warning speech. The lesson uses the video subtitles, divided into logical listening parts.</p><div class="badges"><span class="badge">B1–B2 listening</span><span class="badge">Phrase trainer</span><span class="badge">Gap-fills</span><span class="badge">Mixed phrases</span></div></div><div class="video-card"><div class="video-wrap"><iframe id="yt" src="https://www.youtube.com/embed/BwKGHjo7dxM?rel=0" title="We Must Pause AI Development" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div></div></section>
+
+<main>
+<section class="module" id="phrases"><p class="eyebrow">Section 1</p><h2>Core phrases from the video</h2><p class="lead">Choose EN→RU or RU→EN. Click a card to check the other side.</p><div class="deck-head"><h3>Flashcards</h3><div class="modes"><button class="modebtn" data-mode="enru">EN → RU</button><button class="modebtn secondary" data-mode="ruen">RU → EN</button></div></div><div class="flashgrid">
+    <article class="flipcard" data-en="I&#x27;ve just sent" data-ru="я только что отправил" data-ex="The speaker says he has just sent a letter.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>I&#x27;ve just sent</strong>
+          <button class="speak" data-say="I&#x27;ve just sent">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>я только что отправил</strong>
+          <small>The speaker says he has just sent a letter.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="read it verbatim" data-ru="прочитать дословно" data-ex="He says he is going to read the letter verbatim.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>read it verbatim</strong>
+          <button class="speak" data-say="read it verbatim">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>прочитать дословно</strong>
+          <small>He says he is going to read the letter verbatim.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="how your companies are losing control of the AI technology" data-ru="как ваши компании теряют контроль над технологией ИИ" data-ex="The letter criticises companies for losing control of AI technology.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>how your companies are losing control of the AI technology</strong>
+          <button class="speak" data-say="how your companies are losing control of the AI technology">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>как ваши компании теряют контроль над технологией ИИ</strong>
+          <small>The letter criticises companies for losing control of AI technology.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="AI has been used for the first time" data-ru="ИИ был использован впервые" data-ex="The speaker claims that AI has been used for the first time to create new viruses.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>AI has been used for the first time</strong>
+          <button class="speak" data-say="AI has been used for the first time">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>ИИ был использован впервые</strong>
+          <small>The speaker claims that AI has been used for the first time to create new viruses.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="in the wrong hands" data-ru="в плохих руках / у опасных людей" data-ex="In the wrong hands, powerful technology may be dangerous.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>in the wrong hands</strong>
+          <button class="speak" data-say="in the wrong hands">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>в плохих руках / у опасных людей</strong>
+          <small>In the wrong hands, powerful technology may be dangerous.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="it could lead to new bioweapons" data-ru="это может привести к новым биологическим видам оружия" data-ex="The speaker says this could lead to new bioweapons.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>it could lead to new bioweapons</strong>
+          <button class="speak" data-say="it could lead to new bioweapons">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>это может привести к новым биологическим видам оружия</strong>
+          <small>The speaker says this could lead to new bioweapons.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="result in the deaths of tens of millions of people" data-ru="привести к смерти десятков миллионов людей" data-ex="He warns about risks that could result in the deaths of many people.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>result in the deaths of tens of millions of people</strong>
+          <button class="speak" data-say="result in the deaths of tens of millions of people">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>привести к смерти десятков миллионов людей</strong>
+          <small>He warns about risks that could result in the deaths of many people.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="the world found out" data-ru="мир узнал" data-ex="The world found out about a serious AI incident.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>the world found out</strong>
+          <button class="speak" data-say="the world found out">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>мир узнал</strong>
+          <small>The world found out about a serious AI incident.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="the models escaped their control" data-ru="модели вышли из-под их контроля" data-ex="The speaker says that some models escaped their control.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>the models escaped their control</strong>
+          <button class="speak" data-say="the models escaped their control">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>модели вышли из-под их контроля</strong>
+          <small>The speaker says that some models escaped their control.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="companies are still racing ahead" data-ru="компании всё ещё несутся вперёд" data-ex="He criticises companies for racing ahead.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>companies are still racing ahead</strong>
+          <button class="speak" data-say="companies are still racing ahead">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>компании всё ещё несутся вперёд</strong>
+          <small>He criticises companies for racing ahead.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="nobody can fully understand, predict, or control" data-ru="никто не может полностью понять, предсказать или контролировать" data-ex="He says nobody can fully understand, predict, or control these systems.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>nobody can fully understand, predict, or control</strong>
+          <button class="speak" data-say="nobody can fully understand, predict, or control">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>никто не может полностью понять, предсказать или контролировать</strong>
+          <small>He says nobody can fully understand, predict, or control these systems.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="It is also a betrayal of your own stated commitments." data-ru="Это также предательство ваших собственных заявленных обязательств." data-ex="He calls continued development a betrayal of stated commitments.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>It is also a betrayal of your own stated commitments.</strong>
+          <button class="speak" data-say="It is also a betrayal of your own stated commitments.">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>Это также предательство ваших собственных заявленных обязательств.</strong>
+          <small>He calls continued development a betrayal of stated commitments.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="commit to pause the scaling" data-ru="обязаться приостановить масштабирование" data-ex="He says companies committed to pause the scaling of AI.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>commit to pause the scaling</strong>
+          <button class="speak" data-say="commit to pause the scaling">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>обязаться приостановить масштабирование</strong>
+          <small>He says companies committed to pause the scaling of AI.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="our ability to comply with safety procedures" data-ru="наша способность соблюдать процедуры безопасности" data-ex="The letter mentions the ability to comply with safety procedures.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>our ability to comply with safety procedures</strong>
+          <button class="speak" data-say="our ability to comply with safety procedures">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>наша способность соблюдать процедуры безопасности</strong>
+          <small>The letter mentions the ability to comply with safety procedures.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="to reach the critical threshold" data-ru="достичь критического порога" data-ex="The speaker says AI capabilities have reached a critical threshold.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>to reach the critical threshold</strong>
+          <button class="speak" data-say="to reach the critical threshold">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>достичь критического порога</strong>
+          <small>The speaker says AI capabilities have reached a critical threshold.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="cannot be mitigated" data-ru="не может быть смягчено / снижено" data-ex="If a risk cannot be mitigated, it cannot be reduced enough.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>cannot be mitigated</strong>
+          <button class="speak" data-say="cannot be mitigated">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>не может быть смягчено / снижено</strong>
+          <small>If a risk cannot be mitigated, it cannot be reduced enough.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="we will stop development" data-ru="мы остановим разработку" data-ex="The quoted commitment says: we will stop development.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>we will stop development</strong>
+          <button class="speak" data-say="we will stop development">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>мы остановим разработку</strong>
+          <small>The quoted commitment says: we will stop development.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="almost like a doomsday device" data-ru="почти как устройство Судного дня" data-ex="The speaker quotes a comparison to a doomsday device.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>almost like a doomsday device</strong>
+          <button class="speak" data-say="almost like a doomsday device">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>почти как устройство Судного дня</strong>
+          <small>The speaker quotes a comparison to a doomsday device.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="stand by your words" data-ru="держать слово / отвечать за свои слова" data-ex="He tells AI leaders to stand by their words.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>stand by your words</strong>
+          <button class="speak" data-say="stand by your words">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>держать слово / отвечать за свои слова</strong>
+          <small>He tells AI leaders to stand by their words.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="to avoid disaster" data-ru="чтобы избежать катастрофы" data-ex="He says it is not too late to avoid disaster.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>to avoid disaster</strong>
+          <button class="speak" data-say="to avoid disaster">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>чтобы избежать катастрофы</strong>
+          <small>He says it is not too late to avoid disaster.</small>
+        </div>
+      </div>
+    </article>
+    
+
+    <article class="flipcard" data-en="do not take appropriate action" data-ru="не предпримете соответствующих действий" data-ex="He warns what will happen if they do not take appropriate action.">
+      <div class="flip-inner">
+        <div class="face front-face">
+          <span class="mode-label">EN → RU</span>
+          <strong>do not take appropriate action</strong>
+          <button class="speak" data-say="do not take appropriate action">🔊</button>
+        </div>
+        <div class="face back-face">
+          <span class="mode-label">Translation</span>
+          <strong>не предпримете соответствующих действий</strong>
+          <small>He warns what will happen if they do not take appropriate action.</small>
+        </div>
+      </div>
+    </article>
+    </div></section>
+
+<section class="module" id="trainer"><p class="eyebrow">Section 2</p><h2>Repeat the phrases many times</h2><p class="lead">Say the phrase aloud. Press “I said it” to count repetitions. Use “Next phrase” to practise again.</p><div class="trainer-box"><div><div class="trainer-phrase" id="trainerPhrase"></div><div class="trainer-ru" id="trainerRu"></div><div class="counter" id="trainerCounter">0 repetitions</div></div><div><button class="repeat-btn" id="speakTrainer">Listen</button> <button class="repeat-btn" id="saidIt">I said it</button> <button class="repeat-btn" id="nextPhrase">Next phrase</button></div></div></section>
+
+<section class="module"><p class="eyebrow">Section 3</p><h2>Gap exercises</h2><p class="lead">Complete the key phrases.</p><div class="grid two">
+    <div class="gap">
+      <p>I&#x27;ve just ______</p>
+      <input data-answer="sent" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>read it ______</p>
+      <input data-answer="verbatim" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>in the wrong ______</p>
+      <input data-answer="hands" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>it could ______ to new bioweapons</p>
+      <input data-answer="lead" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>the world ______ out</p>
+      <input data-answer="found" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>the models escaped their ______</p>
+      <input data-answer="control" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>companies are still racing ______</p>
+      <input data-answer="ahead" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>nobody can fully understand, predict, or ______</p>
+      <input data-answer="control" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>a betrayal of your own stated ______</p>
+      <input data-answer="commitments" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>commit to pause the ______</p>
+      <input data-answer="scaling" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>comply with safety ______</p>
+      <input data-answer="procedures" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>reach the critical ______</p>
+      <input data-answer="threshold" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>cannot be ______</p>
+      <input data-answer="mitigated" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>we will stop ______</p>
+      <input data-answer="development" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>stand by your ______</p>
+      <input data-answer="words" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>to avoid ______</p>
+      <input data-answer="disaster" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>do not take appropriate ______</p>
+      <input data-answer="action" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    </div></section>
+
+<section class="module"><p class="eyebrow">Section 4</p><h2>Build mixed phrases</h2><p class="lead">Click the words in the correct order.</p><div class="grid two">
+    <article class="build" data-answer="I&#x27;ve just sent">
+      <h3>1. Build the phrase</h3>
+      <div class="wordbank"><button class="token">just</button><button class="token">I&#x27;ve</button><button class="token">sent</button></div>
+      <div class="answerline"></div>
+      <button class="check-build">Check</button>
+      <button class="clear-build">Clear</button>
+      <button class="show-build">Show</button>
+      <span class="fb"></span>
+    </article>
+    
+    <article class="build" data-answer="read it verbatim">
+      <h3>2. Build the phrase</h3>
+      <div class="wordbank"><button class="token">it</button><button class="token">read</button><button class="token">verbatim</button></div>
+      <div class="answerline"></div>
+      <button class="check-build">Check</button>
+      <button class="clear-build">Clear</button>
+      <button class="show-build">Show</button>
+      <span class="fb"></span>
+    </article>
+    
+    <article class="build" data-answer="how your companies are losing control of the AI technology">
+      <h3>3. Build the phrase</h3>
+      <div class="wordbank"><button class="token">your</button><button class="token">are</button><button class="token">control</button><button class="token">the</button><button class="token">technology</button><button class="token">how</button><button class="token">companies</button><button class="token">losing</button><button class="token">of</button><button class="token">AI</button></div>
+      <div class="answerline"></div>
+      <button class="check-build">Check</button>
+      <button class="clear-build">Clear</button>
+      <button class="show-build">Show</button>
+      <span class="fb"></span>
+    </article>
+    
+    <article class="build" data-answer="AI has been used for the first time">
+      <h3>4. Build the phrase</h3>
+      <div class="wordbank"><button class="token">has</button><button class="token">used</button><button class="token">the</button><button class="token">time</button><button class="token">AI</button><button class="token">been</button><button class="token">for</button><button class="token">first</button></div>
+      <div class="answerline"></div>
+      <button class="check-build">Check</button>
+      <button class="clear-build">Clear</button>
+      <button class="show-build">Show</button>
+      <span class="fb"></span>
+    </article>
+    
+    <article class="build" data-answer="in the wrong hands">
+      <h3>5. Build the phrase</h3>
+      <div class="wordbank"><button class="token">the</button><button class="token">hands</button><button class="token">in</button><button class="token">wrong</button></div>
+      <div class="answerline"></div>
+      <button class="check-build">Check</button>
+      <button class="clear-build">Clear</button>
+      <button class="show-build">Show</button>
+      <span class="fb"></span>
+    </article>
+    
+    <article class="build" data-answer="it could lead to new bioweapons">
+      <h3>6. Build the phrase</h3>
+      <div class="wordbank"><button class="token">could</button><button class="token">to</button><button class="token">bioweapons</button><button class="token">it</button><button class="token">lead</button><button class="token">new</button></div>
+      <div class="answerline"></div>
+      <button class="check-build">Check</button>
+      <button class="clear-build">Clear</button>
+      <button class="show-build">Show</button>
+      <span class="fb"></span>
+    </article>
+    
+    <article class="build" data-answer="result in the deaths of tens of millions of people">
+      <h3>7. Build the phrase</h3>
+      <div class="wordbank"><button class="token">in</button><button class="token">deaths</button><button class="token">tens</button><button class="token">millions</button><button class="token">people</button><button class="token">result</button><button class="token">the</button><button class="token">of</button><button class="token">of</button><button class="token">of</button></div>
+      <div class="answerline"></div>
+      <button class="check-build">Check</button>
+      <button class="clear-build">Clear</button>
+      <button class="show-build">Show</button>
+      <span class="fb"></span>
+    </article>
+    
+    <article class="build" data-answer="the world found out">
+      <h3>8. Build the phrase</h3>
+      <div class="wordbank"><button class="token">world</button><button class="token">out</button><button class="token">the</button><button class="token">found</button></div>
+      <div class="answerline"></div>
+      <button class="check-build">Check</button>
+      <button class="clear-build">Clear</button>
+      <button class="show-build">Show</button>
+      <span class="fb"></span>
+    </article>
+    
+    <article class="build" data-answer="the models escaped their control">
+      <h3>9. Build the phrase</h3>
+      <div class="wordbank"><button class="token">models</button><button class="token">their</button><button class="token">the</button><button class="token">escaped</button><button class="token">control</button></div>
+      <div class="answerline"></div>
+      <button class="check-build">Check</button>
+      <button class="clear-build">Clear</button>
+      <button class="show-build">Show</button>
+      <span class="fb"></span>
+    </article>
+    
+    <article class="build" data-answer="companies are still racing ahead">
+      <h3>10. Build the phrase</h3>
+      <div class="wordbank"><button class="token">are</button><button class="token">racing</button><button class="token">companies</button><button class="token">still</button><button class="token">ahead</button></div>
+      <div class="answerline"></div>
+      <button class="check-build">Check</button>
+      <button class="clear-build">Clear</button>
+      <button class="show-build">Show</button>
+      <span class="fb"></span>
+    </article>
+    
+    <article class="build" data-answer="nobody can fully understand, predict, or control">
+      <h3>11. Build the phrase</h3>
+      <div class="wordbank"><button class="token">can</button><button class="token">understand</button><button class="token">or</button><button class="token">nobody</button><button class="token">fully</button><button class="token">predict</button><button class="token">control</button></div>
+      <div class="answerline"></div>
+      <button class="check-build">Check</button>
+      <button class="clear-build">Clear</button>
+      <button class="show-build">Show</button>
+      <span class="fb"></span>
+    </article>
+    
+    <article class="build" data-answer="It is also a betrayal of your own stated commitments.">
+      <h3>12. Build the phrase</h3>
+      <div class="wordbank"><button class="token">is</button><button class="token">a</button><button class="token">of</button><button class="token">own</button><button class="token">commitments</button><button class="token">It</button><button class="token">also</button><button class="token">betrayal</button><button class="token">your</button><button class="token">stated</button></div>
+      <div class="answerline"></div>
+      <button class="check-build">Check</button>
+      <button class="clear-build">Clear</button>
+      <button class="show-build">Show</button>
+      <span class="fb"></span>
+    </article>
+    </div></section>
+
+<section class="module summary" id="summary"><p class="eyebrow">Section 5</p><h2>Summary before watching</h2><p>The video presents a formal letter calling for a pause in AI development. The speaker says that he has just sent the letter to major leaders in the AI industry and reads it verbatim. The letter argues that companies are losing control of the AI technology they are developing and warns that, <button class="word" data-en="in the wrong hands" data-ru="в плохих руках / у опасных людей">in the wrong hands</button>, this technology could lead to new bioweapons and other catastrophic risks.
+
+The speaker also argues that <button class="word" data-en="companies are still racing ahead" data-ru="компании всё ещё несутся вперёд">companies are still racing ahead</button> even though <button class="word" data-en="nobody can fully understand, predict, or control" data-ru="никто не может полностью понять, предсказать или контролировать">nobody can fully understand, predict, or control</button> the most advanced systems. He says this is a betrayal of their own <button class="word" data-en="stated commitments" data-ru="заявленные обязательства">stated commitments</button>, because they had previously promised to pause scaling or stop development if AI reached a critical threshold and the risks could not be mitigated.
+
+In the final part, the speaker says that AI models are <button class="word" data-en="almost like a doomsday device" data-ru="почти как устройство Судного дня">almost like a doomsday device</button> and asks the companies to stand by their words. He urges them to pause AI development <button class="word" data-en="to avoid disaster" data-ru="чтобы избежать катастрофы">to avoid disaster</button>, and warns that if they <button class="word" data-en="do not take appropriate action" data-ru="не предпримете соответствующих действий">do not take appropriate action</button>, lawmakers will.</p></section>
+
+
+    <section class="part" id="intro" data-progress="part-intro">
+      <div class="part-head">
+        <p class="eyebrow">Part · 00:00–00:32</p>
+        <h2>The letter begins</h2>
+        <p class="preq"><strong>Think:</strong> Who is the speaker addressing, and why does he say he is reading a letter?</p>
+        <p class="listen-note">Listen: 00:00–00:32</p>
+        <button class="jump" data-start="0">Play this part</button>
+      </div>
+      <div class="part-grid">
+        <article class="transcript"><h3>Transcript</h3><p>Thank you very much for joining me. I wanted to take a moment to share with you a letter that <button class="word" data-en="I&#x27;ve just sent" data-ru="я только что отправил">I&#x27;ve just sent</button> to the three major leaders of the AI industry. And here&#x27;s what the letter says. I&#x27;m going to <button class="word" data-en="read it verbatim" data-ru="прочитать дословно">read it verbatim</button>. Dear Mr. Altman, Mr. Amodei, and Mr. Zuckerberg, almost every day there is a news story about <button class="word" data-en="how your companies are losing control of the AI technology" data-ru="как ваши компании теряют контроль над технологией ИИ">how your companies are losing control of the AI technology</button> you are developing with <button class="word" data-en="potentially cataclysmic results" data-ru="потенциально катастрофические последствия">potentially cataclysmic results</button>.</p></article>
+        <aside class="after"><h3>After this part</h3><p>In the opening part, the speaker says that he has just sent a letter to major leaders in the AI industry. He says he is going to <button class="word" data-en="read it verbatim" data-ru="прочитать дословно">read it verbatim</button>. The tone is formal and serious, because the letter accuses companies of losing control of the AI technology they are developing.</p><h4>Useful expressions</h4><div class="pills"><button class="pill speak" data-say="I&#x27;ve just sent">I&#x27;ve just sent 🔊</button><button class="pill speak" data-say="read it verbatim">read it verbatim 🔊</button><button class="pill speak" data-say="major leaders">major leaders 🔊</button><button class="pill speak" data-say="losing control of the AI technology">losing control of the AI technology 🔊</button></div></aside>
+      </div>
+      <div class="tasks">
+        <h3>Listening check</h3>
+        <div class="quizq"><p>1. What does the speaker say he has just sent?</p><div class="opts"><label><input type='radio' name='intro_0' value='0' data-answer='3'> A report</label><label><input type='radio' name='intro_0' value='1' data-answer='3'> A video script</label><label><input type='radio' name='intro_0' value='2' data-answer='3'> A legal contract</label><label><input type='radio' name='intro_0' value='3' data-answer='3'> A letter</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>2. How does he say he will read the letter?</p><div class="opts"><label><input type='radio' name='intro_1' value='0' data-answer='2'> Only partly</label><label><input type='radio' name='intro_1' value='1' data-answer='2'> In translation</label><label><input type='radio' name='intro_1' value='2' data-answer='2'> Verbatim</label><label><input type='radio' name='intro_1' value='3' data-answer='2'> In summary</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>3. Who is the letter addressed to?</p><div class="opts"><label><input type='radio' name='intro_2' value='0' data-answer='1'> Film directors</label><label><input type='radio' name='intro_2' value='1' data-answer='1'> Leaders of major AI companies</label><label><input type='radio' name='intro_2' value='2' data-answer='1'> School teachers</label><label><input type='radio' name='intro_2' value='3' data-answer='1'> Car manufacturers</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+        <h3>Sentence practice</h3>
+        <div class="grid two">
+    <div class="gap">
+      <p>The speaker says he has just ______ a letter.</p>
+      <input data-answer="sent" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>He is going to read it ______.</p>
+      <input data-answer="verbatim" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    </div>
+      </div>
+      <div class="discussion">
+        <h3>Speak</h3>
+        <p>Use two expressions from this part. Give your opinion in 4–6 sentences.</p>
+        <textarea placeholder="Plan your answer..."></textarea>
+      </div>
+      <button class="complete">Mark this part complete</button>
+    </section>
+    <section class="part" id="risks" data-progress="part-risks">
+      <div class="part-head">
+        <p class="eyebrow">Part · 00:32–01:30</p>
+        <h2>Examples of dangerous AI use</h2>
+        <p class="preq"><strong>Think:</strong> What examples does the speaker use to show that AI may be dangerous?</p>
+        <p class="listen-note">Listen: 00:32–01:30</p>
+        <button class="jump" data-start="32">Play this part</button>
+      </div>
+      <div class="part-grid">
+        <article class="transcript"><h3>Transcript</h3><p>This week we learned, frighteningly, that <button class="word" data-en="AI has been used for the first time" data-ru="ИИ был использован впервые">AI has been used for the first time</button> ever to create new viruses. As you know, this type of development <button class="word" data-en="in the wrong hands" data-ru="в плохих руках / у опасных людей">in the wrong hands</button> could lead to new bioweapons that <button class="word" data-en="result in the deaths of tens of millions of people" data-ru="привести к смерти десятков миллионов людей">result in the deaths of tens of millions of people</button>. Last month, <button class="word" data-en="the world found out" data-ru="мир узнал">the world found out</button> that OpenAI lost control of an AI model. The result? The model hacked into another company&#x27;s computers, a clear violation of federal law. After conducting internal reviews, Anthropic and Meta reported their models similarly escaped their control. One of the targeted companies called the AI hack, quote, &quot;an unprecedented event,&quot; and quote, &quot;that deserves an unprecedented response.&quot; Yoshua Bengio, the most cited living scientist in the world, said these incidents, quote, &quot;should serve as <button class="word" data-en="a wake-up call" data-ru="тревожный сигнал">a wake-up call</button>,&quot; and quote.</p></article>
+        <aside class="after"><h3>After this part</h3><p>This part gives alarming examples. The speaker claims that <button class="word" data-en="AI has been used for the first time" data-ru="ИИ был использован впервые">AI has been used for the first time</button> to create new viruses and warns that, <button class="word" data-en="in the wrong hands" data-ru="в плохих руках / у опасных людей">in the wrong hands</button>, this could lead to new bioweapons. He also says that <button class="word" data-en="the world found out" data-ru="мир узнал">the world found out</button> about cases where AI models escaped their control.</p><h4>Useful expressions</h4><div class="pills"><button class="pill speak" data-say="AI has been used for the first time">AI has been used for the first time 🔊</button><button class="pill speak" data-say="in the wrong hands">in the wrong hands 🔊</button><button class="pill speak" data-say="could lead to new bioweapons">could lead to new bioweapons 🔊</button><button class="pill speak" data-say="result in the deaths of tens of millions of people">result in the deaths of tens of millions of people 🔊</button><button class="pill speak" data-say="the world found out">the world found out 🔊</button><button class="pill speak" data-say="escaped their control">escaped their control 🔊</button></div></aside>
+      </div>
+      <div class="tasks">
+        <h3>Listening check</h3>
+        <div class="quizq"><p>1. What does the speaker say AI was used to create?</p><div class="opts"><label><input type='radio' name='risks_0' value='0' data-answer='3'> Electric cars</label><label><input type='radio' name='risks_0' value='1' data-answer='3'> New sports equipment</label><label><input type='radio' name='risks_0' value='2' data-answer='3'> A school timetable</label><label><input type='radio' name='risks_0' value='3' data-answer='3'> New viruses</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>2. What phrase means &#x27;used by dangerous people&#x27;?</p><div class="opts"><label><input type='radio' name='risks_1' value='0' data-answer='2'> At the same time</label><label><input type='radio' name='risks_1' value='1' data-answer='2'> By contrast</label><label><input type='radio' name='risks_1' value='2' data-answer='2'> In the wrong hands</label><label><input type='radio' name='risks_1' value='3' data-answer='2'> In the long run</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>3. What does he say happened to some models?</p><div class="opts"><label><input type='radio' name='risks_2' value='0' data-answer='1'> They were used for transport</label><label><input type='radio' name='risks_2' value='1' data-answer='1'> They escaped their companies&#x27; control</label><label><input type='radio' name='risks_2' value='2' data-answer='1'> They became cheaper</label><label><input type='radio' name='risks_2' value='3' data-answer='1'> They stopped working forever</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+        <h3>Sentence practice</h3>
+        <div class="grid two">
+    <div class="gap">
+      <p>In the wrong ______, it could lead to new bioweapons.</p>
+      <input data-answer="hands" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>The world ______ out about the incident.</p>
+      <input data-answer="found" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    </div>
+      </div>
+      <div class="discussion">
+        <h3>Speak</h3>
+        <p>Use two expressions from this part. Give your opinion in 4–6 sentences.</p>
+        <textarea placeholder="Plan your answer..."></textarea>
+      </div>
+      <button class="complete">Mark this part complete</button>
+    </section>
+    <section class="part" id="race" data-progress="part-race">
+      <div class="part-head">
+        <p class="eyebrow">Part · 01:30–02:35</p>
+        <h2>The race continues despite warnings</h2>
+        <p class="preq"><strong>Think:</strong> Why does the speaker criticise companies for continuing to develop AI?</p>
+        <p class="listen-note">Listen: 01:30–02:35</p>
+        <button class="jump" data-start="90">Play this part</button>
+      </div>
+      <div class="part-grid">
+        <article class="transcript"><h3>Transcript</h3><p>I agree. So do the top scientists at the companies you lead, the very people building this technology. As you know, these technology leaders recently called for the international community to create <button class="word" data-en="a safety mechanism" data-ru="механизм безопасности">a safety mechanism</button>, <button class="word" data-en="a pause button" data-ru="кнопка паузы / механизм остановки">a pause button</button>, to avoid catastrophe. They warn there is, quote, &quot;a real risk that capability development rapidly accelerates beyond our ability to understand or control the resulting systems.&quot; End quote. And yet, at a moment when we have seen human loss of control and the creation of potentially dangerous viruses, your <button class="word" data-en="companies are still racing ahead" data-ru="компании всё ещё несутся вперёд">companies are still racing ahead</button>, investing tens of billions of dollars into a technology that <button class="word" data-en="nobody can fully understand, predict, or control" data-ru="никто не может полностью понять, предсказать или контролировать">nobody can fully understand, predict, or control</button>. That is absurd, irresponsible, and extremely dangerous. <button class="word" data-en="It is also a betrayal of your own stated commitments." data-ru="Это также предательство ваших собственных заявленных обязательств.">It is also a betrayal of your own stated commitments.</button> In 2023, Anthropic said it would, quote,</p></article>
+        <aside class="after"><h3>After this part</h3><p>In this section, the speaker argues that <button class="word" data-en="companies are still racing ahead" data-ru="компании всё ещё несутся вперёд">companies are still racing ahead</button>. He says that <button class="word" data-en="nobody can fully understand, predict, or control" data-ru="никто не может полностью понять, предсказать или контролировать">nobody can fully understand, predict, or control</button> these systems. He also calls this a betrayal of the companies&#x27; own <button class="word" data-en="stated commitments" data-ru="заявленные обязательства">stated commitments</button>, because they had previously promised to stop or pause if safety risks became too serious.</p><h4>Useful expressions</h4><div class="pills"><button class="pill speak" data-say="companies are still racing ahead">companies are still racing ahead 🔊</button><button class="pill speak" data-say="nobody can fully understand, predict, or control">nobody can fully understand, predict, or control 🔊</button><button class="pill speak" data-say="a betrayal of your own stated commitments">a betrayal of your own stated commitments 🔊</button><button class="pill speak" data-say="safety mechanism">safety mechanism 🔊</button><button class="pill speak" data-say="pause button">pause button 🔊</button><button class="pill speak" data-say="avoid catastrophic scenarios">avoid catastrophic scenarios 🔊</button></div></aside>
+      </div>
+      <div class="tasks">
+        <h3>Listening check</h3>
+        <div class="quizq"><p>1. What does &#x27;racing ahead&#x27; suggest?</p><div class="opts"><label><input type='radio' name='race_0' value='0' data-answer='3'> Stopping immediately</label><label><input type='radio' name='race_0' value='1' data-answer='3'> Moving very slowly</label><label><input type='radio' name='race_0' value='2' data-answer='3'> Working only with teachers</label><label><input type='radio' name='race_0' value='3' data-answer='3'> Developing very quickly</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>2. What does the speaker say nobody can fully do?</p><div class="opts"><label><input type='radio' name='race_1' value='0' data-answer='2'> Translate every word</label><label><input type='radio' name='race_1' value='1' data-answer='2'> Build a train track</label><label><input type='radio' name='race_1' value='2' data-answer='2'> Understand, predict, or control the systems</label><label><input type='radio' name='race_1' value='3' data-answer='2'> Drive electric cars</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>3. What does he call the companies&#x27; behaviour?</p><div class="opts"><label><input type='radio' name='race_2' value='0' data-answer='1'> A medical success</label><label><input type='radio' name='race_2' value='1' data-answer='1'> A betrayal of their own stated commitments</label><label><input type='radio' name='race_2' value='2' data-answer='1'> A normal business holiday</label><label><input type='radio' name='race_2' value='3' data-answer='1'> A useful classroom exercise</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+        <h3>Sentence practice</h3>
+        <div class="grid two">
+    <div class="gap">
+      <p>Companies are still racing ______.</p>
+      <input data-answer="ahead" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>Nobody can fully understand, predict, or ______ these systems.</p>
+      <input data-answer="control" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    </div>
+      </div>
+      <div class="discussion">
+        <h3>Speak</h3>
+        <p>Use two expressions from this part. Give your opinion in 4–6 sentences.</p>
+        <textarea placeholder="Plan your answer..."></textarea>
+      </div>
+      <button class="complete">Mark this part complete</button>
+    </section>
+    <section class="part" id="commitments" data-progress="part-commitments">
+      <div class="part-head">
+        <p class="eyebrow">Part · 02:35–03:22</p>
+        <h2>Promises to pause or stop</h2>
+        <p class="preq"><strong>Think:</strong> What earlier promises does the speaker refer to?</p>
+        <p class="listen-note">Listen: 02:35–03:22</p>
+        <button class="jump" data-start="155">Play this part</button>
+      </div>
+      <div class="part-grid">
+        <article class="transcript"><h3>Transcript</h3><p>&quot;<button class="word" data-en="Commit to pause the scaling" data-ru="обязаться приостановить масштабирование">Commit to pause the scaling</button> and/or delay the deployment of new models whenever our scaling ability outstrips <button class="word" data-en="our ability to comply with safety procedures" data-ru="наша способность соблюдать процедуры безопасности">our ability to comply with safety procedures</button>.&quot; End quote. In 2025, Meta said, quote, &quot;If a frontier AI is assessed to have reached the critical risk threshold and <button class="word" data-en="cannot be mitigated" data-ru="не может быть смягчено / снижено">cannot be mitigated</button>, <button class="word" data-en="we will stop development" data-ru="мы остановим разработку">we will stop development</button>.&quot; End quote. That same year, OpenAI said it would, quote, &quot;Halt further development.&quot; End quote, &quot;Until <button class="word" data-en="strong safeguards" data-ru="надёжные меры защиты">strong safeguards</button> were in place if AI capabilities ever reached a critical threshold.&quot; That moment is here.</p></article>
+        <aside class="after"><h3>After this part</h3><p>This part focuses on earlier public commitments. The speaker refers to statements about pausing the scaling of AI if safety procedures cannot keep up. He also quotes a promise to stop development if systems reach a critical threshold and risks <button class="word" data-en="cannot be mitigated" data-ru="не может быть смягчено / снижено">cannot be mitigated</button>.</p><h4>Useful expressions</h4><div class="pills"><button class="pill speak" data-say="commit to pause the scaling">commit to pause the scaling 🔊</button><button class="pill speak" data-say="comply with safety procedures">comply with safety procedures 🔊</button><button class="pill speak" data-say="reach the critical threshold">reach the critical threshold 🔊</button><button class="pill speak" data-say="cannot be mitigated">cannot be mitigated 🔊</button><button class="pill speak" data-say="we will stop development">we will stop development 🔊</button><button class="pill speak" data-say="strong safeguards">strong safeguards 🔊</button></div></aside>
+      </div>
+      <div class="tasks">
+        <h3>Listening check</h3>
+        <div class="quizq"><p>1. What does the speaker say companies committed to pause?</p><div class="opts"><label><input type='radio' name='commitments_0' value='0' data-answer='3'> All school lessons</label><label><input type='radio' name='commitments_0' value='1' data-answer='3'> Electric-car production</label><label><input type='radio' name='commitments_0' value='2' data-answer='3'> A holiday plan</label><label><input type='radio' name='commitments_0' value='3' data-answer='3'> The scaling of AI</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>2. What does &#x27;comply with safety procedures&#x27; mean?</p><div class="opts"><label><input type='radio' name='commitments_1' value='0' data-answer='2'> Make cars faster</label><label><input type='radio' name='commitments_1' value='1' data-answer='2'> Write a poem</label><label><input type='radio' name='commitments_1' value='2' data-answer='2'> Follow safety rules</label><label><input type='radio' name='commitments_1' value='3' data-answer='2'> Ignore safety rules</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>3. What would happen if risks reached a critical threshold?</p><div class="opts"><label><input type='radio' name='commitments_2' value='0' data-answer='1'> They would build a train</label><label><input type='radio' name='commitments_2' value='1' data-answer='1'> They said they would stop development</label><label><input type='radio' name='commitments_2' value='2' data-answer='1'> They would sell more phones</label><label><input type='radio' name='commitments_2' value='3' data-answer='1'> They would open a restaurant</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+        <h3>Sentence practice</h3>
+        <div class="grid two">
+    <div class="gap">
+      <p>They committed to pause the ______ of AI.</p>
+      <input data-answer="scaling" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>The risk cannot be ______.</p>
+      <input data-answer="mitigated" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    </div>
+      </div>
+      <div class="discussion">
+        <h3>Speak</h3>
+        <p>Use two expressions from this part. Give your opinion in 4–6 sentences.</p>
+        <textarea placeholder="Plan your answer..."></textarea>
+      </div>
+      <button class="complete">Mark this part complete</button>
+    </section>
+    <section class="part" id="warning" data-progress="part-warning">
+      <div class="part-head">
+        <p class="eyebrow">Part · 03:22–04:24</p>
+        <h2>Final warning and call to act</h2>
+        <p class="preq"><strong>Think:</strong> What action does the speaker demand at the end?</p>
+        <p class="listen-note">Listen: 03:22–04:24</p>
+        <button class="jump" data-start="202">Play this part</button>
+      </div>
+      <div class="part-grid">
+        <article class="transcript"><h3>Transcript</h3><p>AI capabilities have reached a critical threshold. There is a reason why the head of the CIA says that AI models are, quote, &quot;Akin to digital nuclear weapons and <button class="word" data-en="almost like a doomsday device" data-ru="почти как устройство Судного дня">almost like a doomsday device</button>.&quot; Mr. Altman, Mr. Amodei, and Mr. Zuckerberg, <button class="word" data-en="in the interest of humanity" data-ru="в интересах человечества">in the interest of humanity</button>, <button class="word" data-en="stand by your words" data-ru="держать слово / отвечать за свои слова">stand by your words</button>. Pause AI development. It is not too late <button class="word" data-en="to avoid disaster" data-ru="чтобы избежать катастрофы">to avoid disaster</button>. Stop building machines that humans cannot control. Let me be very clear. If you <button class="word" data-en="do not take appropriate action" data-ru="не предпримете соответствующих действий">do not take appropriate action</button> now, my colleagues and I in the US Senate will. That is the letter that I sent to these three leaders in the AI industry. And thank you very much for joining me. Take care.</p></article>
+        <aside class="after"><h3>After this part</h3><p>The final part is a direct call to pause AI development. The speaker compares advanced AI systems to digital nuclear weapons and <button class="word" data-en="almost like a doomsday device" data-ru="почти как устройство Судного дня">almost like a doomsday device</button>. He tells the AI leaders to stand by their words, pause development, and avoid disaster. He ends by saying that if they <button class="word" data-en="do not take appropriate action" data-ru="не предпримете соответствующих действий">do not take appropriate action</button>, US senators will act.</p><h4>Useful expressions</h4><div class="pills"><button class="pill speak" data-say="almost like a doomsday device">almost like a doomsday device 🔊</button><button class="pill speak" data-say="stand by your words">stand by your words 🔊</button><button class="pill speak" data-say="pause AI development">pause AI development 🔊</button><button class="pill speak" data-say="to avoid disaster">to avoid disaster 🔊</button><button class="pill speak" data-say="do not take appropriate action">do not take appropriate action 🔊</button><button class="pill speak" data-say="in the interest of humanity">in the interest of humanity 🔊</button></div></aside>
+      </div>
+      <div class="tasks">
+        <h3>Listening check</h3>
+        <div class="quizq"><p>1. What does the speaker ask AI leaders to do?</p><div class="opts"><label><input type='radio' name='warning_0' value='0' data-answer='3'> Make more cartoons</label><label><input type='radio' name='warning_0' value='1' data-answer='3'> Start a railway company</label><label><input type='radio' name='warning_0' value='2' data-answer='3'> Buy electric cars</label><label><input type='radio' name='warning_0' value='3' data-answer='3'> Pause AI development</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>2. What phrase means &#x27;keep the promises you made&#x27;?</p><div class="opts"><label><input type='radio' name='warning_1' value='0' data-answer='2'> Float through the air</label><label><input type='radio' name='warning_1' value='1' data-answer='2'> Go on holiday</label><label><input type='radio' name='warning_1' value='2' data-answer='2'> Stand by your words</label><label><input type='radio' name='warning_1' value='3' data-answer='2'> Run out of oil</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+<div class="quizq"><p>3. What does he say will happen if companies do not act?</p><div class="opts"><label><input type='radio' name='warning_2' value='0' data-answer='1'> The companies will teach English</label><label><input type='radio' name='warning_2' value='1' data-answer='1'> He and colleagues in the US Senate will act</label><label><input type='radio' name='warning_2' value='2' data-answer='1'> Nothing at all</label><label><input type='radio' name='warning_2' value='3' data-answer='1'> The video will stop immediately</label></div><button class="check-radio">Check</button><span class="fb"></span></div>
+        <h3>Sentence practice</h3>
+        <div class="grid two">
+    <div class="gap">
+      <p>Stand by your ______.</p>
+      <input data-answer="words" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    
+
+    <div class="gap">
+      <p>It is not too late to avoid ______.</p>
+      <input data-answer="disaster" placeholder="Type the answer">
+      <button class="check-one">Check</button>
+      <button class="show-one">Show</button>
+      <span class="fb"></span>
+    </div>
+    </div>
+      </div>
+      <div class="discussion">
+        <h3>Speak</h3>
+        <p>Use two expressions from this part. Give your opinion in 4–6 sentences.</p>
+        <textarea placeholder="Plan your answer..."></textarea>
+      </div>
+      <button class="complete">Mark this part complete</button>
+    </section>
+
+<section class="module" id="discussion"><p class="eyebrow">Extra discussion</p><h2>Questions for conversation</h2><p class="lead">Answer the questions. Try to use two phrases from the lesson.</p><div class="discussion-grid"><article class="discussion-card"><h3>1. Should AI companies pause development if risks cannot be controlled?</h3><p>Recommended phrases:</p><div class="pills"><button class="pill speak" data-say="pause AI development">pause AI development 🔊</button><button class="pill speak" data-say="cannot be mitigated">cannot be mitigated 🔊</button><button class="pill speak" data-say="stand by your words">stand by your words 🔊</button><button class="pill speak" data-say="to avoid disaster">to avoid disaster 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></article>
+<article class="discussion-card"><h3>2. Who should decide whether an AI system is too dangerous?</h3><p>Recommended phrases:</p><div class="pills"><button class="pill speak" data-say="a safety mechanism">a safety mechanism 🔊</button><button class="pill speak" data-say="critical threshold">critical threshold 🔊</button><button class="pill speak" data-say="appropriate action">appropriate action 🔊</button><button class="pill speak" data-say="strong safeguards">strong safeguards 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></article>
+<article class="discussion-card"><h3>3. Is it fair to compare advanced AI to a doomsday device?</h3><p>Recommended phrases:</p><div class="pills"><button class="pill speak" data-say="almost like a doomsday device">almost like a doomsday device 🔊</button><button class="pill speak" data-say="cataclysmic results">cataclysmic results 🔊</button><button class="pill speak" data-say="a wake-up call">a wake-up call 🔊</button><button class="pill speak" data-say="in the wrong hands">in the wrong hands 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></article>
+<article class="discussion-card"><h3>4. Should governments regulate AI more strictly?</h3><p>Recommended phrases:</p><div class="pills"><button class="pill speak" data-say="do not take appropriate action">do not take appropriate action 🔊</button><button class="pill speak" data-say="US Senate">US Senate 🔊</button><button class="pill speak" data-say="safety procedures">safety procedures 🔊</button><button class="pill speak" data-say="stated commitments">stated commitments 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></article>
+<article class="discussion-card"><h3>5. Can companies be trusted to control powerful technology?</h3><p>Recommended phrases:</p><div class="pills"><button class="pill speak" data-say="losing control">losing control 🔊</button><button class="pill speak" data-say="escaped their control">escaped their control 🔊</button><button class="pill speak" data-say="racing ahead">racing ahead 🔊</button><button class="pill speak" data-say="betrayal of commitments">betrayal of commitments 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></article>
+<article class="discussion-card"><h3>6. What risks from the video seem most serious?</h3><p>Recommended phrases:</p><div class="pills"><button class="pill speak" data-say="new bioweapons">new bioweapons 🔊</button><button class="pill speak" data-say="tens of millions of people">tens of millions of people 🔊</button><button class="pill speak" data-say="catastrophic scenarios">catastrophic scenarios 🔊</button><button class="pill speak" data-say="critical threshold">critical threshold 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></article></div></section>
+
+<section class="module" id="final"><p class="eyebrow">Final task</p><h2>1-minute answer</h2><p>Answer this question: <strong>Should AI development be paused?</strong></p><p>Use at least five phrases:</p><div class="pills"><button class="pill speak" data-say="in the wrong hands">in the wrong hands 🔊</button><button class="pill speak" data-say="cannot be mitigated">cannot be mitigated 🔊</button><button class="pill speak" data-say="stand by your words">stand by your words 🔊</button><button class="pill speak" data-say="to avoid disaster">to avoid disaster 🔊</button><button class="pill speak" data-say="take appropriate action">take appropriate action 🔊</button></div><textarea placeholder="Plan your answer..."></textarea></section>
+</main>
+
+<div class="progress"><strong>Progress</strong><div class="bar"><span id="bar"></span></div><small id="progressText">0 sections complete</small></div>
+<div class="tooltip" id="tip"><strong id="tipEn"></strong><div class="ru" id="tipRu"></div><button class="speak" id="tipSpeak">Listen</button><button id="tipClose">Close</button></div>
+
+<script>
+const phrases = [["I've just sent", "я только что отправил", "The speaker says he has just sent a letter."], ["read it verbatim", "прочитать дословно", "He says he is going to read the letter verbatim."], ["how your companies are losing control of the AI technology", "как ваши компании теряют контроль над технологией ИИ", "The letter criticises companies for losing control of AI technology."], ["AI has been used for the first time", "ИИ был использован впервые", "The speaker claims that AI has been used for the first time to create new viruses."], ["in the wrong hands", "в плохих руках / у опасных людей", "In the wrong hands, powerful technology may be dangerous."], ["it could lead to new bioweapons", "это может привести к новым биологическим видам оружия", "The speaker says this could lead to new bioweapons."], ["result in the deaths of tens of millions of people", "привести к смерти десятков миллионов людей", "He warns about risks that could result in the deaths of many people."], ["the world found out", "мир узнал", "The world found out about a serious AI incident."], ["the models escaped their control", "модели вышли из-под их контроля", "The speaker says that some models escaped their control."], ["companies are still racing ahead", "компании всё ещё несутся вперёд", "He criticises companies for racing ahead."], ["nobody can fully understand, predict, or control", "никто не может полностью понять, предсказать или контролировать", "He says nobody can fully understand, predict, or control these systems."], ["It is also a betrayal of your own stated commitments.", "Это также предательство ваших собственных заявленных обязательств.", "He calls continued development a betrayal of stated commitments."], ["commit to pause the scaling", "обязаться приостановить масштабирование", "He says companies committed to pause the scaling of AI."], ["our ability to comply with safety procedures", "наша способность соблюдать процедуры безопасности", "The letter mentions the ability to comply with safety procedures."], ["to reach the critical threshold", "достичь критического порога", "The speaker says AI capabilities have reached a critical threshold."], ["cannot be mitigated", "не может быть смягчено / снижено", "If a risk cannot be mitigated, it cannot be reduced enough."], ["we will stop development", "мы остановим разработку", "The quoted commitment says: we will stop development."], ["almost like a doomsday device", "почти как устройство Судного дня", "The speaker quotes a comparison to a doomsday device."], ["stand by your words", "держать слово / отвечать за свои слова", "He tells AI leaders to stand by their words."], ["to avoid disaster", "чтобы избежать катастрофы", "He says it is not too late to avoid disaster."], ["do not take appropriate action", "не предпримете соответствующих действий", "He warns what will happen if they do not take appropriate action."]];
+function speak(text){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.84;speechSynthesis.speak(u);}
+document.addEventListener('click',e=>{const b=e.target.closest('.speak');if(b&&b.dataset.say){e.stopPropagation();speak(b.dataset.say);}});
+
+document.querySelectorAll('.flipcard').forEach(card=>card.addEventListener('click',()=>card.classList.toggle('flipped')));
+function setMode(mode){
+  document.querySelectorAll('.modebtn').forEach(b=>b.classList.toggle('secondary', b.dataset.mode!==mode));
+  document.querySelectorAll('.flipcard').forEach(card=>{
+    card.classList.remove('flipped');
+    const en=card.dataset.en, ru=card.dataset.ru, ex=card.dataset.ex;
+    const front=card.querySelector('.front-face');
+    const back=card.querySelector('.back-face');
+    if(mode==='ruen'){
+      front.innerHTML=`<span class="mode-label">RU → EN</span><strong>${ru}</strong>`;
+      back.innerHTML=`<span class="mode-label">English</span><strong>${en}</strong><button class="speak" data-say="${en.replaceAll('"','&quot;')}">🔊</button><small>${ex}</small>`;
+    } else {
+      front.innerHTML=`<span class="mode-label">EN → RU</span><strong>${en}</strong><button class="speak" data-say="${en.replaceAll('"','&quot;')}">🔊</button>`;
+      back.innerHTML=`<span class="mode-label">Translation</span><strong>${ru}</strong><small>${ex}</small>`;
+    }
+  });
+}
+document.querySelectorAll('.modebtn').forEach(btn=>btn.addEventListener('click',()=>setMode(btn.dataset.mode)));
+
+let phraseIndex=0, reps=0;
+function showTrainer(){
+  const p=phrases[phraseIndex];
+  document.getElementById('trainerPhrase').textContent=p[0];
+  document.getElementById('trainerRu').textContent=p[1];
+  document.getElementById('trainerCounter').textContent=reps+' repetitions';
+}
+document.getElementById('speakTrainer').onclick=()=>speak(phrases[phraseIndex][0]);
+document.getElementById('saidIt').onclick=()=>{reps++;showTrainer();};
+document.getElementById('nextPhrase').onclick=()=>{phraseIndex=(phraseIndex+1)%phrases.length;reps=0;showTrainer();};
+showTrainer();
+
+const completedKey='pause_ai_workshop_progress';
+const completed=new Set(JSON.parse(localStorage.getItem(completedKey)||'[]'));
+function saveProgress(){localStorage.setItem(completedKey,JSON.stringify([...completed]));updateProgress();}
+function updateProgress(){const total=document.querySelectorAll('.part').length;const done=completed.size;document.getElementById('bar').style.width=(done/total*100)+'%';document.getElementById('progressText').textContent=done+' / '+total+' video parts complete';}
+document.querySelectorAll('.complete').forEach(btn=>btn.onclick=()=>{const p=btn.closest('.part').dataset.progress;completed.add(p);btn.textContent='Completed';saveProgress();});
+document.querySelectorAll('.part').forEach(p=>{if(completed.has(p.dataset.progress)){const b=p.querySelector('.complete');if(b)b.textContent='Completed';}});
+updateProgress();
+
+const tip=document.getElementById('tip'), tipEn=document.getElementById('tipEn'), tipRu=document.getElementById('tipRu');let current='';
+document.addEventListener('click',e=>{const w=e.target.closest('.word');if(w){current=w.dataset.en;tipEn.textContent=w.dataset.en;tipRu.textContent=w.dataset.ru||'';tip.style.display='block';}});
+document.getElementById('tipSpeak').onclick=()=>current&&speak(current);
+document.getElementById('tipClose').onclick=()=>tip.style.display='none';
+
+document.querySelectorAll('.check-radio').forEach(btn=>btn.onclick=()=>{const q=btn.closest('.quizq');const chosen=q.querySelector('input:checked');const fb=q.querySelector('.fb');if(!chosen){fb.textContent='Choose an answer.';fb.className='fb bad';return;} if(chosen.value===chosen.dataset.answer){fb.textContent='Correct.';fb.className='fb ok';} else {fb.textContent='Try again.';fb.className='fb bad';}});
+document.querySelectorAll('.check-one').forEach(btn=>btn.onclick=()=>{const box=btn.closest('.gap');const input=box.querySelector('input');const ans=(input.dataset.answer||'').trim().toLowerCase();const val=input.value.trim().toLowerCase();const fb=box.querySelector('.fb');if(val===ans){fb.textContent='Correct.';fb.className='fb ok';}else{fb.textContent='Try again.';fb.className='fb bad';}});
+document.querySelectorAll('.show-one').forEach(btn=>btn.onclick=()=>{const box=btn.closest('.gap');const input=box.querySelector('input');input.value=input.dataset.answer;const fb=box.querySelector('.fb');fb.textContent='Answer shown.';fb.className='fb ok';});
+
+document.querySelectorAll('.token').forEach(tok=>tok.addEventListener('click',()=>{
+  const build=tok.closest('.build');
+  const line=build.querySelector('.answerline');
+  if(tok.parentElement.classList.contains('wordbank')){line.appendChild(tok);} else {build.querySelector('.wordbank').appendChild(tok);}
+}));
+function answerText(build){return [...build.querySelectorAll('.answerline .token')].map(t=>t.textContent).join(' ').replace(/\s+/g,' ').trim();}
+document.querySelectorAll('.check-build').forEach(btn=>btn.onclick=()=>{const build=btn.closest('.build');const val=answerText(build).toLowerCase();const ans=build.dataset.answer.toLowerCase();const fb=build.querySelector('.fb');if(val===ans){fb.textContent='Correct.';fb.className='fb ok';}else{fb.textContent='Try again.';fb.className='fb bad';}});
+document.querySelectorAll('.clear-build').forEach(btn=>btn.onclick=()=>{const build=btn.closest('.build');const bank=build.querySelector('.wordbank');[...build.querySelectorAll('.answerline .token')].forEach(t=>bank.appendChild(t));build.querySelector('.fb').textContent='';});
+document.querySelectorAll('.show-build').forEach(btn=>btn.onclick=()=>{const build=btn.closest('.build');const line=build.querySelector('.answerline');line.innerHTML='<span class="token">'+build.dataset.answer+'</span>';const fb=build.querySelector('.fb');fb.textContent='Answer shown.';fb.className='fb ok';});
+
+document.querySelectorAll('.jump').forEach(btn=>btn.onclick=()=>{const iframe=document.getElementById('yt');iframe.src='https://www.youtube.com/embed/BwKGHjo7dxM?start='+btn.dataset.start+'&autoplay=1&rel=0';document.getElementById('video').scrollIntoView({behavior:'smooth'});});
+</script>
+</body>
+</html>

@@ -1,0 +1,943 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<title>IELTS Writing Lab — AI, Authorship & Content Creation</title>
+<style>
+:root {
+  --bg:#090d18; --panel:#11182a; --text:#eef3ff; --muted:#aab5cf; --line:#283552;
+  --accent:#8ba4ff; --accent2:#66dfc7; --warn:#ffd27a; --shadow:0 18px 50px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(139,164,255,.14),transparent 32%),radial-gradient(circle at 100% 20%,rgba(102,223,199,.09),transparent 28%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+a{color:#b8c7ff} .wrap{max-width:1120px;margin:0 auto;padding:24px}
+.hero{padding:52px 0 24px} .kicker,.eyebrow{font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);font-weight:800}
+h1{font-size:clamp(2rem,6vw,4.1rem);line-height:1.02;margin:.5rem 0 1rem;letter-spacing:-.045em;max-width:980px}
+.hero p{max-width:850px;color:var(--muted);font-size:1.05rem} .hero-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-top:24px}
+.card,.section{background:linear-gradient(180deg,rgba(21,30,52,.94),rgba(17,24,42,.94));border:1px solid var(--line);box-shadow:var(--shadow)}
+.card{border-radius:22px;padding:20px} .section{margin:24px 0;border-radius:24px;padding:28px;scroll-margin-top:18px}
+.source-note{font-size:.95rem;color:var(--muted)} .source-note strong{color:var(--text)}
+.video-link{display:inline-flex;gap:8px;align-items:center;text-decoration:none;padding:10px 14px;border-radius:999px;background:rgba(139,164,255,.12);border:1px solid rgba(139,164,255,.3);font-weight:700;margin-top:10px}
+.progress-card{position:sticky;top:12px;z-index:20} .progress-row{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.progress-track{height:10px;background:#202942;border-radius:999px;overflow:hidden;margin-top:12px} .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:.25s}
+nav{margin:26px 0 4px;display:flex;gap:9px;flex-wrap:wrap} nav a{text-decoration:none;color:var(--muted);border:1px solid var(--line);background:rgba(17,24,42,.72);padding:8px 11px;border-radius:999px;font-size:.88rem}
+.section-heading{display:flex;justify-content:space-between;gap:18px;align-items:flex-start} h2{font-size:clamp(1.5rem,3vw,2.15rem);line-height:1.15;margin:.35rem 0 .5rem;letter-spacing:-.025em} h3{margin-top:24px}
+.focus,.micro{color:var(--muted);margin-top:0} .micro{font-size:.9rem} .done{white-space:nowrap;color:var(--muted);font-size:.9rem;background:#0d1425;border:1px solid var(--line);padding:7px 10px;border-radius:10px} .done input{accent-color:#8ba4ff}
+.source-summary{background:#0c1324;border-left:3px solid var(--accent);padding:16px 17px;border-radius:12px;color:#d9e1f5}
+.colloc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.colloc-card{text-align:left;background:#0c1324;color:var(--text);border:1px solid var(--line);padding:15px;border-radius:15px;cursor:pointer;font:inherit;min-height:78px;transition:.18s}
+.colloc-card:hover{transform:translateY(-1px);border-color:#49608f} .colloc-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start} .colloc-en{font-weight:800}
+.tag{font-size:.64rem;text-transform:uppercase;letter-spacing:.06em;padding:3px 6px;border-radius:999px;border:1px solid var(--line);color:var(--muted)} .tag.academic{color:#b9c8ff} .tag.source{color:#ffd68b} .tag.advanced{color:#c5a9ff} .tag.informal{color:#ffb6bd} .tag.semi-formal{color:#9ee3d5}
+.colloc-hidden{display:none;border-top:1px solid var(--line);margin-top:11px;padding-top:11px} .colloc-card.open .colloc-hidden{display:block} .ru{color:var(--accent2);font-weight:700} .example{color:var(--muted);font-size:.9rem;margin:6px 0} .audio{display:inline-block;font-size:.82rem;color:#c5d0ff;padding:4px 0}
+details{border:1px solid var(--line);border-radius:14px;background:#0d1425;margin-top:16px;overflow:hidden} summary{cursor:pointer;padding:14px 16px;font-weight:800;color:#dce5ff} details[open]>summary{border-bottom:1px solid var(--line)} .summary-hint{float:right;color:var(--muted);font-weight:500;font-size:.8rem}
+.transcript{background:#0a101d;border-color:#344462} .transcript-note{padding:13px 16px;color:var(--muted);font-size:.88rem;border-bottom:1px solid var(--line)} .script-body{padding:4px 16px 16px}
+.script-par{display:grid;grid-template-columns:52px 1fr;gap:12px;border-bottom:1px solid rgba(40,53,82,.55);padding:11px 0} .script-par:last-child{border-bottom:0} .script-par p{margin:0;color:#d7e0f4} .time{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--accent2);font-size:.78rem;padding-top:3px}
+mark{background:rgba(255,210,122,.16);color:#ffe3a8;border-bottom:1px solid rgba(255,210,122,.55);padding:0 2px;border-radius:3px}
+.flashcard{background:linear-gradient(145deg,#111b31,#0c1324);border:1px solid var(--line);border-radius:22px;padding:30px;min-height:220px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;user-select:none}
+.flash-main{font-size:clamp(1.5rem,4vw,2.35rem);font-weight:850;line-height:1.15} .flash-sub{margin-top:12px;color:var(--muted);display:none;max-width:760px} .flashcard.revealed .flash-sub{display:block}
+.flash-controls{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap} button.ctrl{background:#18223a;color:var(--text);border:1px solid var(--line);border-radius:11px;padding:9px 13px;font-weight:700;cursor:pointer}
+.prompt{font-family:Georgia,serif;font-size:1.12rem;background:#0c1324;border:1px solid #334365;border-radius:16px;padding:18px} .planning ul{margin:14px 28px 18px;color:var(--muted)}
+.essay-box{margin-top:16px;border:1px solid var(--line);border-radius:15px;overflow:hidden;background:#0b1221} .essay-toolbar{display:flex;justify-content:space-between;gap:12px;padding:10px 13px;border-bottom:1px solid var(--line);font-size:.86rem;color:var(--muted)}
+textarea{width:100%;min-height:300px;resize:vertical;background:#080e1b;border:0;color:var(--text);padding:16px;font:16px/1.65 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;outline:none}
+.sample-note{padding:12px 16px 0;color:var(--muted);font-size:.88rem} .sample-text{padding:4px 16px 18px;color:#dce4f8} .sample-text p{margin:14px 0} .essay-vocab{background:rgba(102,223,199,.14);border-bottom:1px solid rgba(102,223,199,.65);padding:0 2px;border-radius:3px}
+.notes{width:100%;min-height:160px;border:1px solid var(--line);border-radius:14px} footer{padding:20px 0 60px;color:var(--muted);font-size:.88rem}
+@media(max-width:760px){.wrap{padding:16px}.hero{padding-top:30px}.hero-grid{grid-template-columns:1fr}.progress-card{position:relative;top:auto}.section{padding:19px;border-radius:19px}.section-heading{display:block}.done{display:inline-block;margin-top:8px}.colloc-grid{grid-template-columns:1fr}nav{overflow-x:auto;flex-wrap:nowrap;padding-bottom:6px}nav a{white-space:nowrap}.essay-toolbar{display:block}.flashcard{min-height:200px;padding:22px}textarea{min-height:340px}.script-par{grid-template-columns:44px 1fr;gap:8px}.script-body{padding-left:12px;padding-right:12px}}
+@supports(padding:max(0px)){body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}footer{padding-bottom:max(60px,env(safe-area-inset-bottom))}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">IELTS WRITING LAB · AI & CONTENT CREATION</div>
+  <h1>Authorship, AI, Trust & the Future of Content</h1>
+  <p>Source-driven IELTS Writing Task 2 practice based on the supplied video transcript. Each video chapter now contains its matching script immediately after the vocabulary section.</p>
+  <div class="hero-grid">
+    <div class="card source-note">
+      <strong>Source note.</strong> The video is argumentative. Statements about named people and organisations are presented as claims made in the supplied transcript, not as independently verified facts. The script itself comes from the user-supplied auto-generated SRT and has not been silently rewritten.
+      <br><a class="video-link" href="https://youtu.be/LnNuIxTjSig" target="_blank" rel="noopener">▶ Open source video</a>
+    </div>
+    <div class="card progress-card">
+      <div class="progress-row"><strong>Course progress</strong><span id="progressText">0%</span></div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="micro" style="margin-top:10px">Progress, essays and notes are saved automatically on this device.</div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <a href="#part1">Chapter 1</a><a href="#part2">Chapter 2</a><a href="#part3">Chapter 3</a><a href="#part4">Chapter 4</a><a href="#part5">Chapter 5</a>
+  <a href="#flashcards">Flashcards</a><a href="#topic1">Writing topics</a><a href="#notes">Notes</a>
+</nav>
+
+
+    <section class="section" id="part1">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">VIDEO CHAPTER · 0:00–1:16</div>
+          <h2>Chapter 1 — Introduction and the AI-use claim</h2>
+          <p class="focus">The speaker introduces the controversy and explains the structure of the video.</p>
+        </div>
+        <label class="done"><input type="checkbox" class="progress-check" data-id="part1"> Done</label>
+      </div>
+      <div class="source-summary"><strong>Chapter summary.</strong> The opening frames the video as a response to alleged AI-generated passages in The Aesthetic Revolution. It also introduces Mike Israetel’s public admission that he used generative AI to “smooth over the prose” and previews the later discussion of authorship and publisher responsibility.</div>
+      <h3>Main collocations from this chapter</h3>
+      <p class="micro">Tap a phrase to reveal the Russian meaning and an example. Register tags help keep colourful YouTube wording out of formal IELTS essays when necessary.</p>
+      <div class="colloc-grid">
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">blatantly AI-generated portions</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">явно сгенерированные ИИ фрагменты</div>
+            <div class="example">The speaker alleges that the book contains blatantly AI-generated portions.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("blatantly AI-generated portions")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">bring something to someone&#x27;s attention</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">обратить чьё-либо внимание на что-либо</div>
+            <div class="example">The statement was brought to the speaker&#x27;s attention by another creator.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("bring something to someone's attention")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">admit to using generative AI</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">признать использование генеративного ИИ</div>
+            <div class="example">A creator may admit to using generative AI while defending the practice.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("admit to using generative AI")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">smooth over the prose</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">сгладить / отшлифовать текст</div>
+            <div class="example">AI may be used to smooth over the prose of a draft.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("smooth over the prose")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">critically analyse a claim</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">критически анализировать утверждение</div>
+            <div class="example">The video sets out to critically analyse the admission.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("critically analyse a claim")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">what an admission means for a publisher</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">какие последствия признание имеет для издателя</div>
+            <div class="example">The issue also raises questions about what such an admission means for a publisher.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("what an admission means for a publisher")">🔊 Listen</span>
+          </div>
+        </button>
+        </div>
+
+      <details class="transcript" open>
+        <summary>Script · 0:00–1:16 <span class="summary-hint">hide / show</span></summary>
+        <div class="transcript-note">Auto-generated transcript from the supplied SRT. The wording has been retained rather than silently corrected. Highlighted phrases are source vocabulary used above.</div>
+        <div class="script-body"><div class="script-par"><span class="time">0:00</span><p>If Mike is telling the truth, and a whole team of editors actually reviewed this manuscript, then every single one of them should be fired. Last week, I published a video demonstrating that embarrassing portions of Mike Israetel&#x27;s latest book, The Aesthetic Revolution: Embracing Vanity and the Future of Fitness to Unlock Your Healthiest Self, are AI-generated.</p></div><div class="script-par"><span class="time">0:31</span><p>Go watch it if you haven&#x27;t seen it already. While waiting for the publisher, Hachette Book Group, to discontinue the book due to the <mark>blatantly AI-generated portions</mark>, it was brought to my attention by my friend Shawn Stone of Carved Out of Stone, that Mike Israetel has actually admitted</p></div><div class="script-par"><span class="time">0:51</span><p>to using generative AI, and I quote, &quot;to <mark>smooth over the prose</mark> in his book.&quot; In chapter two of this video, I&#x27;ll read out Mike&#x27;s admission. In chapter three, I&#x27;ll critically analyze his admission. In chapter four, I&#x27;ll explain what his admission means for the publisher, Hachette Book Group. I conclude in chapter five. Mike</p></div></div>
+      </details>
+    </section>
+    
+    <section class="section" id="part2">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">VIDEO CHAPTER · 1:16–2:41</div>
+          <h2>Chapter 2 — Mike Israetel’s admission</h2>
+          <p class="focus">The video reads Mike’s public statement about how and why he used AI.</p>
+        </div>
+        <label class="done"><input type="checkbox" class="progress-check" data-id="part2"> Done</label>
+      </div>
+      <div class="source-summary"><strong>Chapter summary.</strong> In the quoted statement, Mike says he used AI to help smooth over some prose, that the publishing team knew about it, and that he intends to continue using AI to improve his work. He also claims that the structure, ideas and content are his own and compares AI use with using a PC and the internet.</div>
+      <h3>Main collocations from this chapter</h3>
+      <p class="micro">Tap a phrase to reveal the Russian meaning and an example. Register tags help keep colourful YouTube wording out of formal IELTS essays when necessary.</p>
+      <div class="colloc-grid">
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">use AI to help me smooth over some of the prose</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">использовать ИИ, чтобы помочь отшлифовать часть текста</div>
+            <div class="example">The statement says AI was used to help smooth over some of the prose.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("use AI to help me smooth over some of the prose")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">be made aware of something</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">быть поставленным в известность</div>
+            <div class="example">The editors were reportedly made aware of the AI use.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("be made aware of something")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">well before the book comes out</span>
+            <span class="tag neutral">neutral</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">задолго до выхода книги</div>
+            <div class="example">The disclosure was made well before the book came out.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("well before the book comes out")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">if and when someone detects</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">если и когда кто-то обнаружит</div>
+            <div class="example">The statement anticipates what may happen if and when someone detects AI-style writing.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("if and when someone detects")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">elements of AI writing styles</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">элементы стиля письма ИИ</div>
+            <div class="example">The author acknowledged that readers might detect elements of AI writing styles.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("elements of AI writing styles")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">use AI unapologetically</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">использовать ИИ без извинений / не оправдываясь</div>
+            <div class="example">Some creators say they will use AI unapologetically to improve their work.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("use AI unapologetically")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">improve my work in various ways</span>
+            <span class="tag neutral">neutral</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">улучшать свою работу разными способами</div>
+            <div class="example">AI can be used to improve one&#x27;s work in various ways.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("improve my work in various ways")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">structure, ideas and content</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">структура, идеи и содержание</div>
+            <div class="example">A creator may distinguish the structure, ideas and content from the final wording.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("structure, ideas and content")">🔊 Listen</span>
+          </div>
+        </button>
+        </div>
+
+      <details class="transcript" open>
+        <summary>Script · 1:16–2:41 <span class="summary-hint">hide / show</span></summary>
+        <div class="transcript-note">Auto-generated transcript from the supplied SRT. The wording has been retained rather than silently corrected. Highlighted phrases are source vocabulary used above.</div>
+        <div class="script-body"><div class="script-par"><span class="time">1:16</span><p>Israetel&#x27;s admission to using AI for The Aesthetic Revolution, published to X, formerly known as Twitter, on the 21st of May, 2026, reads as follows: &quot;I 100% used AI to help me smooth over some of the prose for my upcoming book, The Aesthetic Revolution. This was before a whole team of editors from the publishing company further smoothed the</p></div><div class="script-par"><span class="time">1:44</span><p>prose over. They were made aware of this. I&#x27;m stating this now, <mark>well before the book comes out</mark>, so that there is no controversy <mark>if and when someone detects</mark> that it has <mark>elements of AI writing styles</mark> in it. I will also be using AI in the future unapologetically to <mark>improve my work in various ways</mark>. All of the structure and ideas and content of the book is 100%</p></div><div class="script-par"><span class="time">2:15</span><p>my own work. If you find it disconcerting that I did this, I wish you the best and I wouldn&#x27;t ever in a million years try to push you to read the book against your interests. Sarcastically, [snorts] maybe you also find that I used a PC and the internet to help me write the book. Heavens, exclaim winking smiley face.</p></div></div>
+      </details>
+    </section>
+    
+    <section class="section" id="part3">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">VIDEO CHAPTER · 2:41–10:25</div>
+          <h2>Chapter 3 — Critical analysis: authorship, AI and copyright</h2>
+          <p class="focus">The speaker challenges the authorship claim and develops arguments about expression, copyright, disclosure and responsibility.</p>
+        </div>
+        <label class="done"><input type="checkbox" class="progress-check" data-id="part3"> Done</label>
+      </div>
+      <div class="source-summary"><strong>Chapter summary.</strong> This is the longest analytical section. The speaker argues that generating passages with AI is different from using a passive word processor, questions the claim of sole authorship, discusses the idea–expression distinction in copyright, and criticises what he sees as incomplete disclosure and pre-emptive damage control.</div>
+      <h3>Main collocations from this chapter</h3>
+      <p class="micro">Tap a phrase to reveal the Russian meaning and an example. Register tags help keep colourful YouTube wording out of formal IELTS essays when necessary.</p>
+      <div class="colloc-grid">
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">claim sole authorship</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">заявлять о единоличном авторстве</div>
+            <div class="example">It is harder to claim sole authorship when substantial passages are generated by an algorithm.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("claim sole authorship")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">outsource some of the actual content to an algorithm</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">передать часть фактического создания контента алгоритму</div>
+            <div class="example">Critics object when creators outsource some of the actual content to an algorithm.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("outsource some of the actual content to an algorithm")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">reductive and misleading</span>
+            <span class="tag advanced">advanced</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">упрощённый до искажения и вводящий в заблуждение</div>
+            <div class="example">The speaker calls the comparison with a word processor reductive and misleading.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("reductive and misleading")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">passively record human expression</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">пассивно фиксировать человеческое выражение</div>
+            <div class="example">A conventional word processor merely records human expression.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("passively record human expression")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">actively invent the expression</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">активно создавать формулировку</div>
+            <div class="example">Generative AI can actively invent the expression for the user.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("actively invent the expression")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">a feeble euphemism</span>
+            <span class="tag advanced">advanced</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">слабый / неубедительный эвфемизм</div>
+            <div class="example">The phrase &#x27;smoothing&#x27; is criticised as a feeble euphemism.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("a feeble euphemism")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">come clean on the extent of AI use</span>
+            <span class="tag semi-formal">semi-formal</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">полностью раскрыть масштаб использования ИИ</div>
+            <div class="example">Audiences may expect creators to come clean on the extent of AI use.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("come clean on the extent of AI use")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">intellectual property principles</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">принципы интеллектуальной собственности</div>
+            <div class="example">AI-generated material raises difficult intellectual property questions.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("intellectual property principles")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">the idea-expression distinction</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">различие между идеей и её выражением</div>
+            <div class="example">The idea-expression distinction is central to the copyright argument.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("the idea-expression distinction")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">literal expression</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">конкретная словесная форма / буквальное выражение</div>
+            <div class="example">Copyright law often distinguishes ideas from their literal expression.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("literal expression")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">pre-emptive damage control</span>
+            <span class="tag advanced">advanced</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">упреждающее управление репутационным ущербом</div>
+            <div class="example">Disclosure can sometimes function as pre-emptive damage control.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("pre-emptive damage control")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">short-circuit a controversy</span>
+            <span class="tag advanced">advanced</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">предотвратить / пресечь спор заранее</div>
+            <div class="example">A brief declaration may not be enough to short-circuit a controversy.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("short-circuit a controversy")">🔊 Listen</span>
+          </div>
+        </button>
+        </div>
+
+      <details class="transcript" open>
+        <summary>Script · 2:41–10:25 <span class="summary-hint">hide / show</span></summary>
+        <div class="transcript-note">Auto-generated transcript from the supplied SRT. The wording has been retained rather than silently corrected. Highlighted phrases are source vocabulary used above.</div>
+        <div class="script-body"><div class="script-par"><span class="time">2:41</span><p>Let&#x27;s now critically analyze this. The core of this chapter will examine Mike&#x27;s assertion that all of the structure and ideas and content of the book is 100% his own work. There are two issues with this assertion. First, it&#x27;s false and second, the question of whether Mike came up with the ideas is irrelevant to whether he owns the copyright to the book. Mike&#x27;s assertion that 100% of the</p></div><div class="script-par"><span class="time">3:11</span><p>content in The Aesthetic Revolution is his own work is false. It&#x27;s false because the book contains AI-generated portions. Owing to the AI-generated portions in The Aesthetic Revolution, Mike factually can&#x27;t claim that 100% of the content is his own work. But then again, Mike&#x27;s flexible relationship with the truth is something he&#x27;s perfectly happy to admit himself.</p></div><div class="script-par"><span class="time">3:40</span><p>&gt;&gt; I&#x27;ve lied. I&#x27;ve lied a lot. Lying is easy as hell. I can do it at the drop of a hat. &gt;&gt; We now know Solomon was looking at an accidentally uploaded incorrect rough draft. &gt;&gt; AI provided a part of the product. So, to claim that the content is 100% his own, while simultaneously using AI to generate portions of the book, is a</p></div><div class="script-par"><span class="time">4:04</span><p>legal and semantic contradiction. You can&#x27;t <mark>claim sole authorship</mark> of a book when you <mark>outsource some of the actual content to an algorithm</mark>. Mike&#x27;s sarcastic comparison to using a PC and the internet is <mark>reductive and misleading</mark>. A word processor passively records your human expression, just like a glorified pen. Whereas generative AI actively invents the expression for you.</p></div><div class="script-par"><span class="time">4:34</span><p>They&#x27;re not analogous tools, and equating them is an inept strategic mystification that insults the intelligence of his audience. Mike further asserts that he 100% used AI to help him smooth over some of the prose in The Aesthetic Revolution. Mike, AI did a lot more than just smooth over the prose in your book. A more honest admission wouldn&#x27;t hide</p></div><div class="script-par"><span class="time">5:04</span><p>behind the feeble euphemism of smoothing. A truly honest admission would be that you used AI to generate the actual content in the book, because you did. And that&#x27;s a very different thing. My video, Mike Israetel&#x27;s latest book is AI slop, provided instances of content generated by AI, and suggested that much of the prose also looked as if it had been generated by AI. I don&#x27;t</p></div><div class="script-par"><span class="time">5:34</span><p>know if Mike will ever come clean on the extent to which he used generative AI to produce his content. But, I note that Mike&#x27;s statement on X specifically concerns the prose, which Mike confesses to having smoothed over with AI. But the declaration also acknowledges that the prose reveals traces of AI. That admission is unequivocally made when he says,</p></div><div class="script-par"><span class="time">6:03</span><p>&quot;I&#x27;m stating this now so that there is no controversy if and when someone detect that it has elements of AI writing styles in it.&quot; Mike doesn&#x27;t say &quot;if someone suggests that it has elements of AI writing styles in it.&quot; He says, &quot;if and when they&#x27;re detected.&quot; So, putting the if aside, the statement reads, &quot;when someone detect that it has elements of AI writing styles.&quot; Meaning</p></div><div class="script-par"><span class="time">6:35</span><p>that an AI component in the prose is there and it is detectable. The noun that he uses that characterizes AI writing is styles. That word styles applies to the prose. And the reason why anyone would detect it is that bits of it are written by AI. The only question is how much? And possibly only Mike&#x27;s computer and</p></div><div class="script-par"><span class="time">7:07</span><p>internet history, when subpoenaed, will reveal the true extent of it. Mike&#x27;s mention of the ideas being his own is irrelevant to whether he owns the copyright. If Mike thinks that he legally owns the copyright to the work just because he came up with the underlying ideas, then he demonstrates a catastrophic ignorance of basic intellectual property</p></div><div class="script-par"><span class="time">7:34</span><p>principles. Most notably, <mark>the idea-expression distinction</mark>. It is true that copyright can protect the original selection, arrangement, and underlying structure of a work, but it doesn&#x27;t protect raw ideas or concepts, even when they&#x27;re as original and groundbreaking as Mike&#x27;s. That is to say, Mike doesn&#x27;t own the copyright to his brilliant ideas in the</p></div><div class="script-par"><span class="time">8:02</span><p>Aesthetic Revolution, like using liposuction or skin removal surgery to boost your self-esteem. Copyright can only protect the <mark>literal expression</mark> of those ideas. So, even if we grant that Mike independently authored the structural blueprint of this book, if he fed those concepts into a large language model and relied on that software to generate the prose, the actual words on</p></div><div class="script-par"><span class="time">8:30</span><p>the page, then Mike isn&#x27;t the author of that <mark>literal expression</mark>. Nobody is, since non-humans can&#x27;t possess copyright. Mike&#x27;s confession, &quot;I&#x27;m stating this now, well before the book comes out, so that there is no controversy if and when someone detects that it has elements of AI writing styles in it.&quot; is very strange. A</p></div><div class="script-par"><span class="time">8:55</span><p>preemptive admission of guilt doesn&#x27;t magically neutralize the offense. It merely proves that he knew the final product was compromised before it ever went to print. I mean, dressing up preemptive damage control as transparency is a cynical PR tactic that gaslights his audience into thinking that because he confessed to it, they have no right</p></div><div class="script-par"><span class="time">9:23</span><p>to criticize it. It&#x27;s as if he thinks that a show of being upfront about an unspecified degree of AI use will forestall any kind of scrutiny. But, why would this declaration, which isn&#x27;t all that candid, by the way, because it doesn&#x27;t say how much AI was used. Why would it short-circuit an inevitable controversy over unacceptable writing with inadmissible flaws? Mike</p></div><div class="script-par"><span class="time">9:52</span><p>imagines that he&#x27;s created a clever moral defense of his AI use, completely unaware that a rigorous legal defense will be needed if copyright is still to be asserted. Mike&#x27;s moral posturing on social media doesn&#x27;t rewrite intellectual property law. And his flippant attitude won&#x27;t protect him or his publisher if they attempt to enforce exclusive rights over the</p></div><div class="script-par"><span class="time">10:20</span><p>machine-generated content in Mike&#x27;s book. Now we turn to the collateral</p></div></div>
+      </details>
+    </section>
+    
+    <section class="section" id="part4">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">VIDEO CHAPTER · 10:25–14:49</div>
+          <h2>Chapter 4 — Publisher and editorial responsibility</h2>
+          <p class="focus">Responsibility shifts from the author to editors, the publishing house and institutional quality control.</p>
+        </div>
+        <label class="done"><input type="checkbox" class="progress-check" data-id="part4"> Done</label>
+      </div>
+      <div class="source-summary"><strong>Chapter summary.</strong> The speaker argues that if editors knew about AI involvement, the publisher cannot be treated as a passive bystander. He criticises alleged proofreading failures, questions whether AI may also have been used editorially, and links the issue to commercial publishers’ role as quality gatekeepers.</div>
+      <h3>Main collocations from this chapter</h3>
+      <p class="micro">Tap a phrase to reveal the Russian meaning and an example. Register tags help keep colourful YouTube wording out of formal IELTS essays when necessary.</p>
+      <div class="colloc-grid">
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">throw someone under the bus</span>
+            <span class="tag informal">informal</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">подставить кого-либо / переложить на него ответственность</div>
+            <div class="example">The speaker argues that the statement throws the publisher under the bus.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("throw someone under the bus")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">state something on the record</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">официально заявить что-либо</div>
+            <div class="example">A public statement puts the claim on the record.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("state something on the record")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">be reliant on AI</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">зависеть от ИИ / в значительной степени опираться на ИИ</div>
+            <div class="example">The speaker alleges that the text was reliant on AI.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("be reliant on AI")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">push something to print</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">отправить материал в печать</div>
+            <div class="example">Commercial pressure can encourage a publisher to push work to print too quickly.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("push something to print")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">calamitous failures</span>
+            <span class="tag advanced">advanced</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">катастрофические провалы</div>
+            <div class="example">The video describes the alleged editorial mistakes as calamitous failures.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("calamitous failures")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">a competent junior proofreader</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">компетентный младший корректор</div>
+            <div class="example">Even a competent junior proofreader should catch obvious duplication.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("a competent junior proofreader")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">cut corners</span>
+            <span class="tag semi-formal">semi-formal</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">экономить на качестве / делать кое-как</div>
+            <div class="example">Automation can tempt organisations to cut corners.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("cut corners")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">be complicit in the use of AI</span>
+            <span class="tag advanced">advanced</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">быть причастным к использованию ИИ</div>
+            <div class="example">Editors may be seen as complicit if they knowingly approve undisclosed AI use.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("be complicit in the use of AI")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">a breach of trust</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">нарушение доверия</div>
+            <div class="example">Weak quality control can become a breach of trust between publisher and consumer.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("a breach of trust")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">quality control</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">контроль качества</div>
+            <div class="example">Professional publishing depends on effective quality control.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("quality control")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">institutional credibility</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">институциональное доверие / репутация</div>
+            <div class="example">Repeated failures may undermine institutional credibility.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("institutional credibility")">🔊 Listen</span>
+          </div>
+        </button>
+        </div>
+
+      <details class="transcript" open>
+        <summary>Script · 10:25–14:49 <span class="summary-hint">hide / show</span></summary>
+        <div class="transcript-note">Auto-generated transcript from the supplied SRT. The wording has been retained rather than silently corrected. Highlighted phrases are source vocabulary used above.</div>
+        <div class="script-body"><div class="script-par"><span class="time">10:25</span><p>damage in Mike&#x27;s statement, his publisher. Mike explicitly claims that a whole team of editors from the publishing company further smoothed the prose over, and crucially, that they were made aware of this. If we take Mike at his word, then he&#x27;s just thrown Hachette Book Group under the bus. He&#x27;s stating on the record that a major legacy publishing</p></div><div class="script-par"><span class="time">10:54</span><p>house knew that the text was reliant on AI and still pushed it to print. But it gets worse. If Mike is telling the truth and a whole team of editors actually reviewed this manuscript, then every single one of them should be fired. Why? Because of two undeniable <mark>calamitous failures</mark>. First, they either missed the blindingly obvious AI-generated portions,</p></div><div class="script-par"><span class="time">11:25</span><p>or having seen them or heard about the illegitimate method from Mike himself, they decided to ignore it or possibly reduce it to some hasty degree. They also allowed things like the incline dumbbell barbell press and an entirely duplicated paragraph into the final version that any competent junior proofreader would have caught on the first pass. You know, the</p></div><div class="script-par"><span class="time">11:54</span><p>one that appears on both pages 262 and 263. What exactly is Hachette paying this team to do if they&#x27;re blind to literal copy-paste errors and unmistakably AI-generated content? Especially when by Mike&#x27;s testimony, they knew that he was using AI. Second, and perhaps more damning, Mike claims that these editors further</p></div><div class="script-par"><span class="time">12:25</span><p>smoothed the prose over. Given what appears to be a gob-smacking amount of synthetic writing present in the final publication, we have to ask the question, did Hachette&#x27;s editorial team just feed the manuscript back into a large language model? If they were the ones tasked with the final smoothing, then it seems quite possible that the publisher&#x27;s own editors added even more</p></div><div class="script-par"><span class="time">12:54</span><p>AI-generated content themselves just to <mark>cut corners</mark>. I mean, by Mike&#x27;s testimony, this illustrious team already knew that Mike used AI because he made them aware of it. So, in taking on the book, they had already decided that AI use is acceptable. And so, why then would they be shy of extending the scandal and</p></div><div class="script-par"><span class="time">13:22</span><p>engaging AI themselves in their slick practice of smoothing over whatever slop Mike sent them. Mike&#x27;s tweet is priceless. It paints a picture where everyone from author to editor to graphic designer could <mark>be complicit in the use of AI</mark>. What does the board of directors at Hachette think about this revelation? Hachette published AI slop. Knowing full</p></div><div class="script-par"><span class="time">13:51</span><p>well that AI was used by Mike&#x27;s testimony. To illustrate the seriousness of this, at Australian universities and counterparts elsewhere, research books in the prestigious A1 category must be released by recognized commercial publishers. Because Hachette is considered one of these publishers,</p></div><div class="script-par"><span class="time">14:14</span><p>the academic community trusts it rigorously to judge and guarantee the quality of its output. For Hachette to abandon all vigilance and publish AI slop is a scandalous breach of the trust placed in commercial publishers. Hachette is running an editorial department so incompetent and lazy that they&#x27;re perfectly willing to charge consumers for machine-generated</p></div><div class="script-par"><span class="time">14:42</span><p>slop. Hachette&#x27;s <mark>quality control</mark> and <mark>institutional credibility</mark> are in ruins.</p></div></div>
+      </details>
+    </section>
+    
+    <section class="section" id="part5">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">VIDEO CHAPTER · 14:49–17:33</div>
+          <h2>Chapter 5 — Conclusion: trust, effort and creative work</h2>
+          <p class="focus">The conclusion moves from legal and editorial questions to consumer trust, human effort and the value of creative work.</p>
+        </div>
+        <label class="done"><input type="checkbox" class="progress-check" data-id="part5"> Done</label>
+      </div>
+      <div class="source-summary"><strong>Chapter summary.</strong> The final chapter criticises the use of AI as a substitute for demanding creative labour. It returns to questions of consumer trust, editorial standards and whether audiences are being sold synthetic content as human expertise, before contrasting automation with the satisfaction of doing difficult creative work oneself.</div>
+      <h3>Main collocations from this chapter</h3>
+      <p class="micro">Tap a phrase to reveal the Russian meaning and an example. Register tags help keep colourful YouTube wording out of formal IELTS essays when necessary.</p>
+      <div class="colloc-grid">
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">an arduous work of generating content</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">тяжёлая работа по созданию контента</div>
+            <div class="example">The speaker emphasises the arduous work of generating content oneself.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("an arduous work of generating content")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">vapid algorithmic output</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">пустой / бессодержательный алгоритмический результат</div>
+            <div class="example">The conclusion attacks what it describes as vapid algorithmic output.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("vapid algorithmic output")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">a buyer-beware clause</span>
+            <span class="tag advanced">advanced</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">оговорка в духе «покупатель, будь осторожен»</div>
+            <div class="example">The speaker rejects the statement as a buyer-beware clause.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("a buyer-beware clause")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">wave away legitimate ethical concerns</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">отмахнуться от обоснованных этических опасений</div>
+            <div class="example">Disclosure should not be used to wave away legitimate ethical concerns.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("wave away legitimate ethical concerns")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">sell synthetic content as human expertise</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">продавать синтетический контент как человеческую экспертность</div>
+            <div class="example">Consumers may object to synthetic content being sold as human expertise.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("sell synthetic content as human expertise")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">editorial standards</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">редакционные стандарты</div>
+            <div class="example">Publishers should provide clear editorial standards for AI-assisted work.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("editorial standards")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">have the fire in the belly</span>
+            <span class="tag informal">informal</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">иметь внутренний огонь / сильную мотивацию</div>
+            <div class="example">The speaker asks whether a writer still has the fire in the belly to create.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("have the fire in the belly")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">do the hard yards</span>
+            <span class="tag informal">informal</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">проделать тяжёлую работу</div>
+            <div class="example">Writers often develop skill by doing the hard yards.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("do the hard yards")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">a rewarding process</span>
+            <span class="tag neutral">neutral</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">приносящий удовлетворение процесс</div>
+            <div class="example">Difficult creative work can still be a deeply rewarding process.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("a rewarding process")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">unscrupulous authors</span>
+            <span class="tag academic">academic</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">недобросовестные авторы</div>
+            <div class="example">Clear standards may discourage unscrupulous authors from misleading consumers.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("unscrupulous authors")">🔊 Listen</span>
+          </div>
+        </button>
+        
+        <button class="colloc-card" onclick="this.classList.toggle('open')">
+          <div class="colloc-top">
+            <span class="colloc-en">derelict publishers</span>
+            <span class="tag source">source</span>
+          </div>
+          <div class="colloc-hidden">
+            <div class="ru">безответственные / халатные издатели</div>
+            <div class="example">The speaker ends with a harsh criticism of derelict publishers.</div>
+            <span class="audio" onclick="event.stopPropagation(); speakText("derelict publishers")">🔊 Listen</span>
+          </div>
+        </button>
+        </div>
+
+      <details class="transcript" open>
+        <summary>Script · 14:49–17:33 <span class="summary-hint">hide / show</span></summary>
+        <div class="transcript-note">Auto-generated transcript from the supplied SRT. The wording has been retained rather than silently corrected. Highlighted phrases are source vocabulary used above.</div>
+        <div class="script-body"><div class="script-par"><span class="time">14:49</span><p>Well, with all of that, Mike has single-handedly achieved the hat trick of the century. He&#x27;s not only brought a new standard of mediocrity to the fitness industry, but he&#x27;s brought disrepute upon the publishing industry. This is a scandal like nothing that we&#x27;ve seen. Shame, shame, shame on all of you. Mike Israetel&#x27;s preemptive attempt at</p></div><div class="script-par"><span class="time">15:16</span><p>damage control is illogical, riddled with ignorance, and pompously complacent. He wants the prestige and financial reward of being an author without actually doing the arduous work of generating the content himself. And he expects his audience to subsidize his business with his <mark>vapid algorithmic output</mark>. Telling his critics that he</p></div><div class="script-par"><span class="time">15:41</span><p>wouldn&#x27;t ever in a million years try to push you to read the book sounds disingenuous. Mike, we already knew that you can&#x27;t compel us to read your book. That was never the issue. And this buyer beware clause makes no sense. It&#x27;s an attempt to wave away the legitimate ethical concerns of selling synthetic content as human expertise. This is a breach of</p></div><div class="script-par"><span class="time">16:06</span><p>trust between an author, a publisher, and the consumer. Until Hachette Book Group provides a definitive statement on their <mark>editorial standards</mark> and their complicity in this mess, The Aesthetic Revolution remains a fatally compromised product that deserves exactly the level of respect that Mike showed for his readership, which is to say bugger all. An author</p></div><div class="script-par"><span class="time">16:33</span><p>confessing to AI use has a lot of questions to answer. And perhaps the most trenchant is about the author&#x27;s faith in himself or herself. Why didn&#x27;t Mike <mark>have the fire in the belly</mark> to generate the content himself? Why didn&#x27;t he have the passion that the AI pretends to have? Why didn&#x27;t he relish the job of creating</p></div><div class="script-par"><span class="time">16:55</span><p>content in the way that I, like any dedicated writer, loved composing Solomon&#x27;s Guide to Fat Loss, even though it was grueling at times, and I felt those hard yards with every step. But afterwards, it&#x27;s so rewarding. The reviews are rave, and writer and reader alike are satisfied or even overjoyed. Please, please let us not slide backwards into a future where this</p></div><div class="script-par"><span class="time">17:24</span><p>innocence is trashed by the greed and stupidity of <mark>unscrupulous authors</mark> and <mark>derelict publishers</mark>.</p></div></div>
+      </details>
+    </section>
+    
+
+<section class="section" id="flashcards">
+  <div class="eyebrow">ACTIVE RECALL</div>
+  <h2>Flashcards — vocabulary from the video</h2>
+  <p class="focus">Tap the card to reveal the other side. Switch direction once recognition starts masquerading as mastery.</p>
+  <div class="flashcard" id="flashcard" onclick="revealCard()">
+    <div class="flash-main" id="flashMain"></div>
+    <div class="flash-sub" id="flashSub"></div>
+  </div>
+  <div class="flash-controls">
+    <button class="ctrl" onclick="event.stopPropagation();prevCard()">← Previous</button>
+    <button class="ctrl" onclick="event.stopPropagation();speakCurrent()">🔊 English</button>
+    <button class="ctrl" onclick="event.stopPropagation();toggleDirection()">RU ⇄ EN</button>
+    <button class="ctrl" onclick="event.stopPropagation();shuffleCards()">Shuffle</button>
+    <button class="ctrl" onclick="event.stopPropagation();nextCard()">Next →</button>
+  </div>
+</section>
+
+<section class="section">
+  <div class="eyebrow">WRITING PRACTICE</div>
+  <h2>IELTS Writing Task 2 topics</h2>
+  <p class="focus">The prompts broaden the source into realistic debates about AI, authorship, disclosure, publishing and creative work. Write first; reveal the model only afterwards.</p>
+</section>
+
+
+    <section class="section writing-topic" id="topic1">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">IELTS WRITING TASK 2</div>
+          <h2>Topic 1 — AI assistance and authorship</h2>
+        </div>
+        <label class="done"><input type="checkbox" class="progress-check" data-id="topic1"> Done</label>
+      </div>
+      <div class="prompt">Some people believe that writers and content creators who use artificial intelligence should still be regarded as the sole authors of their work, while others disagree. Discuss both views and give your own opinion.</div>
+      <details class="planning">
+        <summary>Planning ideas</summary>
+        <ul><li>View A: ideas, structure and final responsibility may still come from the human creator.</li><li>View B: substantial machine-generated expression weakens a claim to sole authorship.</li><li>Position: authorship can remain human when AI is limited to assistance, but substantial generation should be disclosed and acknowledged.</li></ul>
+      </details>
+      <div class="essay-box">
+        <div class="essay-toolbar"><strong>Your essay</strong><span>Suggested target: 280–340 words</span></div>
+        <textarea class="essay-input" data-save="essay1" placeholder="Write your response here..."></textarea>
+      </div>
+      <details class="sample">
+        <summary>Reveal sample answer</summary>
+        <div class="sample-note">Highlighted expressions recycle language from the source video.</div>
+        <div class="sample-text"><p>Artificial intelligence has become increasingly integrated into writing and digital content production, raising questions about whether a creator who uses such tools can still <span class="essay-vocab">claim sole authorship</span>. While some argue that authorship should depend primarily on who develops the <span class="essay-vocab">underlying ideas</span> and takes responsibility for the final product, others contend that extensive reliance on <span class="essay-vocab">machine-generated content</span> makes such a claim difficult to justify. In my view, AI assistance is compatible with human authorship, provided that the technology does not replace a substantial part of the creative expression.</p>
+<p>Those who defend AI-assisted creators point out that modern authors already rely on numerous tools. A writer may use spelling software, search engines, editors and generative AI to improve their work while retaining control over the structural blueprint, argument and final decisions. From this perspective, the decisive factor is not whether technology was involved but whether the human creator remained intellectually responsible for the work. AI can, for example, <span class="essay-vocab">smooth over the prose</span> or suggest alternative formulations without changing the writer&#x27;s <span class="essay-vocab">underlying ideas</span>.</p>
+<p>However, the situation becomes more problematic when creators outsource content to an algorithm. If substantial passages are generated by software, a distinction emerges between originating an idea and producing its <span class="essay-vocab">literal expression</span>. In such cases, an unqualified claim of sole authorship may mislead consumers who believe they are paying for human expertise. Moreover, audiences may reasonably expect creators to disclose the extent of AI use, particularly when creative authenticity is part of the product&#x27;s appeal.</p>
+<p>Overall, AI should be regarded as a legitimate creative tool rather than an automatic threat to authorship. Nevertheless, the greater the proportion of <span class="essay-vocab">machine-generated content</span>, the weaker the case for presenting the final work as entirely human. Clear disclosure can therefore preserve both technological efficiency and public trust.</p></div>
+      </details>
+    </section>
+    
+    <section class="section writing-topic" id="topic2">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">IELTS WRITING TASK 2</div>
+          <h2>Topic 2 — Mandatory disclosure</h2>
+        </div>
+        <label class="done"><input type="checkbox" class="progress-check" data-id="topic2"> Done</label>
+      </div>
+      <div class="prompt">Creators who use artificial intelligence to produce books, videos or other paid content should be legally required to disclose this to consumers. To what extent do you agree or disagree?</div>
+      <details class="planning">
+        <summary>Planning ideas</summary>
+        <ul><li>Agree: consumers may be paying specifically for human expertise.</li><li>Agree: disclosure discourages misleading marketing and supports informed choice.</li><li>Qualification: trivial AI assistance such as grammar correction should not require cumbersome labels.</li></ul>
+      </details>
+      <div class="essay-box">
+        <div class="essay-toolbar"><strong>Your essay</strong><span>Suggested target: 280–340 words</span></div>
+        <textarea class="essay-input" data-save="essay2" placeholder="Write your response here..."></textarea>
+      </div>
+      <details class="sample">
+        <summary>Reveal sample answer</summary>
+        <div class="sample-note">Highlighted expressions recycle language from the source video.</div>
+        <div class="sample-text"><p>As generative artificial intelligence becomes a routine part of content production, some argue that creators should be legally required to disclose its use. I largely agree with this proposal because consumers are entitled to know whether a substantial part of a product is machine-generated, although minor forms of automated assistance should not trigger the same requirement.</p>
+<p>The strongest argument for disclosure is that the origin of content can materially affect consumer expectations. A reader who buys a specialist book may believe that its wording reflects the author&#x27;s human expertise, while a subscriber may support a creator partly because of that person&#x27;s distinctive voice. If a substantial amount of the final product consists of <span class="essay-vocab">algorithmic output</span>, concealing this fact risks creating <span class="essay-vocab">a breach of trust</span>. A clear declaration of the extent of AI use would allow consumers to make an informed choice without preventing creators from using new technology.</p>
+<p>Mandatory disclosure could also strengthen professional standards. Publishers, media companies and online platforms increasingly act as professional gatekeepers, yet commercial pressure may encourage them to <span class="essay-vocab">cut corners</span> when automation reduces production costs. Requiring transparent labelling would make <span class="essay-vocab">quality control</span> easier to scrutinise and could protect <span class="essay-vocab">institutional credibility</span>. Importantly, a candid admission should not merely function as <span class="essay-vocab">pre-emptive damage control</span>; it should provide meaningful information about how AI contributed to the final work.</p>
+<p>Nevertheless, regulation should distinguish between generative involvement and ordinary digital assistance. Requiring a formal warning whenever software corrects punctuation or suggests a synonym would be excessive and difficult to enforce. Disclosure should therefore apply when AI generates or substantially rewrites content rather than when it performs minor editorial functions.</p>
+<p>In conclusion, significant AI involvement in paid creative work should be disclosed because it affects both consumer choice and trust. Sensible regulation, however, must focus on substantive generation rather than routine technological assistance.</p></div>
+      </details>
+    </section>
+    
+    <section class="section writing-topic" id="topic3">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">IELTS WRITING TASK 2</div>
+          <h2>Topic 3 — Publishers and platforms</h2>
+        </div>
+        <label class="done"><input type="checkbox" class="progress-check" data-id="topic3"> Done</label>
+      </div>
+      <div class="prompt">When AI-generated content is published or distributed, some people believe that the publisher or platform should be as responsible for its quality as the original creator. Discuss both views and give your own opinion.</div>
+      <details class="planning">
+        <summary>Planning ideas</summary>
+        <ul><li>Against shared responsibility: platforms cannot manually inspect every item and primary responsibility lies with creators.</li><li>For shared responsibility: professional publishers actively select, edit, market and profit from content.</li><li>Position: responsibility should increase with editorial control and commercial involvement.</li></ul>
+      </details>
+      <div class="essay-box">
+        <div class="essay-toolbar"><strong>Your essay</strong><span>Suggested target: 280–340 words</span></div>
+        <textarea class="essay-input" data-save="essay3" placeholder="Write your response here..."></textarea>
+      </div>
+      <details class="sample">
+        <summary>Reveal sample answer</summary>
+        <div class="sample-note">Highlighted expressions recycle language from the source video.</div>
+        <div class="sample-text"><p>The rapid growth of <span class="essay-vocab">machine-generated content</span> has complicated the question of who should be held responsible for poor or misleading material. Some believe that responsibility rests mainly with the individual creator, whereas others argue that publishers and platforms should share accountability. I believe that institutional responsibility should depend on the degree of editorial control an organisation exercises over the content.</p>
+<p>There are reasonable grounds for placing primary responsibility on creators. Large digital platforms host enormous quantities of material and cannot realistically verify every sentence before publication. The individual who submits the work usually knows how it was produced and is therefore in the best position to disclose the use of generative AI. Excessive liability for platforms could also discourage innovation and lead companies to remove legitimate material simply to avoid legal risk.</p>
+<p>Traditional publishers, however, occupy a different position. They select manuscripts, employ editors, market finished products and often present their involvement as a guarantee of quality. If an editorial team knowingly approves <span class="essay-vocab">machine-generated content</span> without adequate <span class="essay-vocab">quality control</span>, it becomes difficult to treat the organisation as a passive intermediary. Professional gatekeepers derive commercial value from their <span class="essay-vocab">institutional credibility</span>, and this creates a corresponding duty to maintain <span class="essay-vocab">editorial standards</span>. Otherwise, consumers may reasonably view the resulting failures as <span class="essay-vocab">a breach of trust</span>.</p>
+<p>A balanced approach is therefore required. Open platforms should be expected to provide effective reporting systems and clear AI policies, but they should not automatically be liable for every piece of user-generated material. By contrast, organisations that actively edit, endorse and sell content should bear substantially greater responsibility for what reaches the public.</p>
+<p>In conclusion, accountability should follow control. The more deeply a publisher or platform is involved in selecting and refining content, the stronger its obligation to ensure that automation is used transparently and responsibly.</p></div>
+      </details>
+    </section>
+    
+    <section class="section writing-topic" id="topic4">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">IELTS WRITING TASK 2</div>
+          <h2>Topic 4 — AI and creative quality</h2>
+        </div>
+        <label class="done"><input type="checkbox" class="progress-check" data-id="topic4"> Done</label>
+      </div>
+      <div class="prompt">Artificial intelligence allows people to create written and visual content much faster than before. Some believe this improves creativity, while others think it will lead to a decline in the quality of creative work. Discuss both views and give your own opinion.</div>
+      <details class="planning">
+        <summary>Planning ideas</summary>
+        <ul><li>Positive: lower technical barriers, faster experimentation, more people can create.</li><li>Negative: temptation to cut corners, homogenised style, less skill development.</li><li>Position: AI can raise productivity, but quality depends on human judgement and revision.</li></ul>
+      </details>
+      <div class="essay-box">
+        <div class="essay-toolbar"><strong>Your essay</strong><span>Suggested target: 280–340 words</span></div>
+        <textarea class="essay-input" data-save="essay4" placeholder="Write your response here..."></textarea>
+      </div>
+      <details class="sample">
+        <summary>Reveal sample answer</summary>
+        <div class="sample-note">Highlighted expressions recycle language from the source video.</div>
+        <div class="sample-text"><p>Generative artificial intelligence has dramatically reduced the time required to produce text, images and other media. Supporters claim that this technology expands creative possibilities, while critics fear that easy automation will fill the market with low-quality and repetitive work. In my view, AI can enhance creativity, but only when it supports rather than replaces the human creative process.</p>
+<p>On the positive side, generative tools lower barriers to experimentation. A person with limited technical skills can rapidly test several visual concepts, restructure a draft or explore alternative ways of expressing an idea. This allows creators to devote more attention to <span class="essay-vocab">underlying ideas</span> instead of spending excessive time on routine production. AI may also help independent creators compete with larger organisations by reducing the arduous work of creating preliminary material.</p>
+<p>The danger, however, is that efficiency can encourage people to <span class="essay-vocab">cut corners</span>. When creators rely heavily on AI, they may accept polished <span class="essay-vocab">algorithmic output</span> without developing a distinctive voice or checking whether the material is accurate and coherent. As <span class="essay-vocab">machine-generated content</span> becomes easier to produce at scale, audiences may face an enormous quantity of superficially competent but unoriginal work. In addition, creators who repeatedly outsource difficult tasks to an algorithm may fail to develop the skills that traditionally emerge from doing the hard yards themselves.</p>
+<p>For this reason, the decisive issue is not whether AI is used but how it is used. Human judgement, revision and <span class="essay-vocab">quality control</span> remain essential. The strongest creators are likely to use automation to accelerate experimentation while retaining responsibility for the final expression and ensuring that their work reflects genuine expertise.</p>
+<p>Overall, artificial intelligence can broaden creative opportunities, but technological speed should not be confused with creative quality. Its benefits will be greatest when efficiency is combined with strong human standards.</p></div>
+      </details>
+    </section>
+    
+    <section class="section writing-topic" id="topic5">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">IELTS WRITING TASK 2</div>
+          <h2>Topic 5 — Human effort and the value of content</h2>
+        </div>
+        <label class="done"><input type="checkbox" class="progress-check" data-id="topic5"> Done</label>
+      </div>
+      <div class="prompt">Some people argue that consumers should judge creative work only by its final quality, regardless of whether it was produced by a human or by artificial intelligence. Others believe that the human effort behind a work is an important part of its value. Discuss both views and give your own opinion.</div>
+      <details class="planning">
+        <summary>Planning ideas</summary>
+        <ul><li>Final-quality view: audiences buy usefulness, entertainment or beauty, not labour hours.</li><li>Human-effort view: biography, craft and authentic expression can be part of what consumers value.</li><li>Position: final quality matters most for functional content, while human provenance matters more in art, expertise and personal creative brands.</li></ul>
+      </details>
+      <div class="essay-box">
+        <div class="essay-toolbar"><strong>Your essay</strong><span>Suggested target: 280–340 words</span></div>
+        <textarea class="essay-input" data-save="essay5" placeholder="Write your response here..."></textarea>
+      </div>
+      <details class="sample">
+        <summary>Reveal sample answer</summary>
+        <div class="sample-note">Highlighted expressions recycle language from the source video.</div>
+        <div class="sample-text"><p>Whether the value of creative work lies in its final quality or in the human effort behind it has become increasingly important as generative AI improves. Some argue that consumers should care only about the usefulness or artistic quality of the finished product, whereas others believe that human labour and creative authenticity are themselves valuable. I consider both factors relevant, although their importance varies according to the type of content.</p>
+<p>For many functional products, the final result is understandably the main concern. A consumer reading basic instructions, viewing an advertisement or using a simple graphic may have little reason to care how the material was produced, provided that it is accurate and effective. Generative AI can improve efficiency, reduce costs and <span class="essay-vocab">smooth over the prose</span> of routine documents without meaningfully reducing their value. In these contexts, insisting that every creator <span class="essay-vocab">do the hard yards</span> manually may simply preserve inefficient practices.</p>
+<p>Creative and expert content is different because audiences often value the person behind the work. Readers may buy a book not merely for information but for an author&#x27;s judgement, experience and individual voice. Similarly, followers may support a content creator because they want access to human expertise rather than <span class="essay-vocab">machine-generated content</span>. If extensive AI use is concealed, the final product may violate consumer expectations even when its surface quality is acceptable. This is why transparency about the extent of AI use can matter.</p>
+<p>In my view, therefore, neither the output nor the process should be treated as universally decisive. Functional content can reasonably be judged mainly by results, while art, commentary and expert work often derive part of their value from human authorship. Consumers should ultimately be given enough information to decide which aspect matters to them.</p>
+<p>In conclusion, AI has not made human effort irrelevant; instead, it has made the origin of creative work another characteristic that informed consumers may choose to value.</p></div>
+      </details>
+    </section>
+    
+
+<section class="section" id="notes">
+  <div class="eyebrow">PERSONAL LANGUAGE BANK</div>
+  <h2>Notes & reusable phrases</h2>
+  <textarea class="notes" data-save="notes" placeholder="Keep recurring errors, useful collocations and arguments here..."></textarea>
+</section>
+
+<footer>Built from the user-supplied transcript for IELTS Writing Task 2 practice. British spelling is used in model answers.</footer>
+</div>
+
+<script>
+const cards = [{"en": "blatantly AI-generated portions", "ru": "явно сгенерированные ИИ фрагменты", "ex": "The speaker alleges that the book contains blatantly AI-generated portions.", "reg": "source"}, {"en": "bring something to someone's attention", "ru": "обратить чьё-либо внимание на что-либо", "ex": "The statement was brought to the speaker's attention by another creator.", "reg": "academic"}, {"en": "admit to using generative AI", "ru": "признать использование генеративного ИИ", "ex": "A creator may admit to using generative AI while defending the practice.", "reg": "academic"}, {"en": "smooth over the prose", "ru": "сгладить / отшлифовать текст", "ex": "AI may be used to smooth over the prose of a draft.", "reg": "source"}, {"en": "critically analyse a claim", "ru": "критически анализировать утверждение", "ex": "The video sets out to critically analyse the admission.", "reg": "academic"}, {"en": "what an admission means for a publisher", "ru": "какие последствия признание имеет для издателя", "ex": "The issue also raises questions about what such an admission means for a publisher.", "reg": "academic"}, {"en": "use AI to help me smooth over some of the prose", "ru": "использовать ИИ, чтобы помочь отшлифовать часть текста", "ex": "The statement says AI was used to help smooth over some of the prose.", "reg": "source"}, {"en": "be made aware of something", "ru": "быть поставленным в известность", "ex": "The editors were reportedly made aware of the AI use.", "reg": "academic"}, {"en": "well before the book comes out", "ru": "задолго до выхода книги", "ex": "The disclosure was made well before the book came out.", "reg": "neutral"}, {"en": "if and when someone detects", "ru": "если и когда кто-то обнаружит", "ex": "The statement anticipates what may happen if and when someone detects AI-style writing.", "reg": "source"}, {"en": "elements of AI writing styles", "ru": "элементы стиля письма ИИ", "ex": "The author acknowledged that readers might detect elements of AI writing styles.", "reg": "source"}, {"en": "use AI unapologetically", "ru": "использовать ИИ без извинений / не оправдываясь", "ex": "Some creators say they will use AI unapologetically to improve their work.", "reg": "source"}, {"en": "improve my work in various ways", "ru": "улучшать свою работу разными способами", "ex": "AI can be used to improve one's work in various ways.", "reg": "neutral"}, {"en": "structure, ideas and content", "ru": "структура, идеи и содержание", "ex": "A creator may distinguish the structure, ideas and content from the final wording.", "reg": "academic"}, {"en": "claim sole authorship", "ru": "заявлять о единоличном авторстве", "ex": "It is harder to claim sole authorship when substantial passages are generated by an algorithm.", "reg": "academic"}, {"en": "outsource some of the actual content to an algorithm", "ru": "передать часть фактического создания контента алгоритму", "ex": "Critics object when creators outsource some of the actual content to an algorithm.", "reg": "source"}, {"en": "reductive and misleading", "ru": "упрощённый до искажения и вводящий в заблуждение", "ex": "The speaker calls the comparison with a word processor reductive and misleading.", "reg": "advanced"}, {"en": "passively record human expression", "ru": "пассивно фиксировать человеческое выражение", "ex": "A conventional word processor merely records human expression.", "reg": "source"}, {"en": "actively invent the expression", "ru": "активно создавать формулировку", "ex": "Generative AI can actively invent the expression for the user.", "reg": "source"}, {"en": "a feeble euphemism", "ru": "слабый / неубедительный эвфемизм", "ex": "The phrase 'smoothing' is criticised as a feeble euphemism.", "reg": "advanced"}, {"en": "come clean on the extent of AI use", "ru": "полностью раскрыть масштаб использования ИИ", "ex": "Audiences may expect creators to come clean on the extent of AI use.", "reg": "semi-formal"}, {"en": "intellectual property principles", "ru": "принципы интеллектуальной собственности", "ex": "AI-generated material raises difficult intellectual property questions.", "reg": "academic"}, {"en": "the idea-expression distinction", "ru": "различие между идеей и её выражением", "ex": "The idea-expression distinction is central to the copyright argument.", "reg": "academic"}, {"en": "literal expression", "ru": "конкретная словесная форма / буквальное выражение", "ex": "Copyright law often distinguishes ideas from their literal expression.", "reg": "academic"}, {"en": "pre-emptive damage control", "ru": "упреждающее управление репутационным ущербом", "ex": "Disclosure can sometimes function as pre-emptive damage control.", "reg": "advanced"}, {"en": "short-circuit a controversy", "ru": "предотвратить / пресечь спор заранее", "ex": "A brief declaration may not be enough to short-circuit a controversy.", "reg": "advanced"}, {"en": "throw someone under the bus", "ru": "подставить кого-либо / переложить на него ответственность", "ex": "The speaker argues that the statement throws the publisher under the bus.", "reg": "informal"}, {"en": "state something on the record", "ru": "официально заявить что-либо", "ex": "A public statement puts the claim on the record.", "reg": "academic"}, {"en": "be reliant on AI", "ru": "зависеть от ИИ / в значительной степени опираться на ИИ", "ex": "The speaker alleges that the text was reliant on AI.", "reg": "academic"}, {"en": "push something to print", "ru": "отправить материал в печать", "ex": "Commercial pressure can encourage a publisher to push work to print too quickly.", "reg": "source"}, {"en": "calamitous failures", "ru": "катастрофические провалы", "ex": "The video describes the alleged editorial mistakes as calamitous failures.", "reg": "advanced"}, {"en": "a competent junior proofreader", "ru": "компетентный младший корректор", "ex": "Even a competent junior proofreader should catch obvious duplication.", "reg": "source"}, {"en": "cut corners", "ru": "экономить на качестве / делать кое-как", "ex": "Automation can tempt organisations to cut corners.", "reg": "semi-formal"}, {"en": "be complicit in the use of AI", "ru": "быть причастным к использованию ИИ", "ex": "Editors may be seen as complicit if they knowingly approve undisclosed AI use.", "reg": "advanced"}, {"en": "a breach of trust", "ru": "нарушение доверия", "ex": "Weak quality control can become a breach of trust between publisher and consumer.", "reg": "academic"}, {"en": "quality control", "ru": "контроль качества", "ex": "Professional publishing depends on effective quality control.", "reg": "academic"}, {"en": "institutional credibility", "ru": "институциональное доверие / репутация", "ex": "Repeated failures may undermine institutional credibility.", "reg": "academic"}, {"en": "an arduous work of generating content", "ru": "тяжёлая работа по созданию контента", "ex": "The speaker emphasises the arduous work of generating content oneself.", "reg": "source"}, {"en": "vapid algorithmic output", "ru": "пустой / бессодержательный алгоритмический результат", "ex": "The conclusion attacks what it describes as vapid algorithmic output.", "reg": "source"}, {"en": "a buyer-beware clause", "ru": "оговорка в духе «покупатель, будь осторожен»", "ex": "The speaker rejects the statement as a buyer-beware clause.", "reg": "advanced"}, {"en": "wave away legitimate ethical concerns", "ru": "отмахнуться от обоснованных этических опасений", "ex": "Disclosure should not be used to wave away legitimate ethical concerns.", "reg": "source"}, {"en": "sell synthetic content as human expertise", "ru": "продавать синтетический контент как человеческую экспертность", "ex": "Consumers may object to synthetic content being sold as human expertise.", "reg": "source"}, {"en": "editorial standards", "ru": "редакционные стандарты", "ex": "Publishers should provide clear editorial standards for AI-assisted work.", "reg": "academic"}, {"en": "have the fire in the belly", "ru": "иметь внутренний огонь / сильную мотивацию", "ex": "The speaker asks whether a writer still has the fire in the belly to create.", "reg": "informal"}, {"en": "do the hard yards", "ru": "проделать тяжёлую работу", "ex": "Writers often develop skill by doing the hard yards.", "reg": "informal"}, {"en": "a rewarding process", "ru": "приносящий удовлетворение процесс", "ex": "Difficult creative work can still be a deeply rewarding process.", "reg": "neutral"}, {"en": "unscrupulous authors", "ru": "недобросовестные авторы", "ex": "Clear standards may discourage unscrupulous authors from misleading consumers.", "reg": "academic"}, {"en": "derelict publishers", "ru": "безответственные / халатные издатели", "ex": "The speaker ends with a harsh criticism of derelict publishers.", "reg": "source"}];
+let cardIndex=0, direction='en-ru';
+function speakText(t){if(!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.92;speechSynthesis.speak(u)}
+function renderCard(){const c=cards[cardIndex],box=document.getElementById('flashcard');box.classList.remove('revealed');const main=document.getElementById('flashMain'),sub=document.getElementById('flashSub');if(direction==='en-ru'){main.textContent=c.en;sub.innerHTML='<b>'+c.ru+'</b><br><span style="font-size:.9rem">'+c.ex+'</span>'}else{main.textContent=c.ru;sub.innerHTML='<b>'+c.en+'</b><br><span style="font-size:.9rem">'+c.ex+'</span>'}}
+function revealCard(){document.getElementById('flashcard').classList.toggle('revealed')} function nextCard(){cardIndex=(cardIndex+1)%cards.length;renderCard()} function prevCard(){cardIndex=(cardIndex-1+cards.length)%cards.length;renderCard()} function toggleDirection(){direction=direction==='en-ru'?'ru-en':'en-ru';renderCard()}
+function shuffleCards(){for(let i=cards.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[cards[i],cards[j]]=[cards[j],cards[i]]}cardIndex=0;renderCard()} function speakCurrent(){speakText(cards[cardIndex].en)}
+function saveInputs(){document.querySelectorAll('[data-save]').forEach(el=>{el.value=localStorage.getItem('aiIELTS_'+el.dataset.save)||'';el.addEventListener('input',()=>localStorage.setItem('aiIELTS_'+el.dataset.save,el.value))})}
+function setupProgress(){const checks=[...document.querySelectorAll('.progress-check')];checks.forEach(ch=>{ch.checked=localStorage.getItem('aiIELTS_done_'+ch.dataset.id)==='1';ch.addEventListener('change',()=>{localStorage.setItem('aiIELTS_done_'+ch.dataset.id,ch.checked?'1':'0');updateProgress()})});updateProgress()}
+function updateProgress(){const checks=[...document.querySelectorAll('.progress-check')],done=checks.filter(x=>x.checked).length,pct=checks.length?Math.round(done/checks.length*100):0;document.getElementById('progressText').textContent=pct+'%';document.getElementById('progressFill').style.width=pct+'%'}
+renderCard();saveInputs();setupProgress();
+</script>
+</body>
+</html>
